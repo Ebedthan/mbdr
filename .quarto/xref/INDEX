@@ -1,9 +1,11 @@
 {
   "index.qmd": {
-    "index.html": "337a9d54"
+    "index.html": "337a9d54",
+    "index.tex": "cd8fd6f2"
   },
   "intro.qmd": {
-    "intro.html": "efe0409c"
+    "intro.html": "efe0409c",
+    "intro.tex": "2b7f3e95"
   },
   "summary.qmd": {
     "summary.html": "30d9f930"
@@ -12,15 +14,19 @@
     "chapter1.html": "d6b137d4"
   },
   "references.qmd": {
-    "references.html": "b6fade02"
+    "references.html": "b6fade02",
+    "references.tex": "54deee83"
   },
   "datasets.qmd": {
-    "datasets.html": "1fc45a39"
+    "datasets.html": "1fc45a39",
+    "datasets.tex": "4322b26a"
   },
   "exploration.qmd": {
-    "exploration.html": "165c2482"
+    "exploration.html": "165c2482",
+    "exploration.tex": "483ddfb9"
   },
   "regression.qmd": {
-    "regression.html": "34c1a94f"
+    "regression.html": "34c1a94f",
+    "regression.tex": "a5d6cdb4"
   }
 }
