@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "Modélisation des données biologiques avec R"
+  author: "Anicet Ebou"
+  date: "6/3/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - datasets.qmd
+    - exploration.qmd
+    - regression.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+

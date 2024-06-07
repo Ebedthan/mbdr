@@ -1,0 +1,26 @@
+{
+  "index.qmd": {
+    "index.html": "337a9d54"
+  },
+  "intro.qmd": {
+    "intro.html": "efe0409c"
+  },
+  "summary.qmd": {
+    "summary.html": "30d9f930"
+  },
+  "chapter1.qmd": {
+    "chapter1.html": "d6b137d4"
+  },
+  "references.qmd": {
+    "references.html": "b6fade02"
+  },
+  "datasets.qmd": {
+    "datasets.html": "1fc45a39"
+  },
+  "exploration.qmd": {
+    "exploration.html": "165c2482"
+  },
+  "regression.qmd": {
+    "regression.html": "34c1a94f"
+  }
+}

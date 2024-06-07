@@ -1,0 +1,7 @@
+# Bienvenue {.unnumbered}
+
+Ce livre est le manuel compagnon de la formation **modélisation de données biologiques** organisée par le service innovation et transfert de technologie des fablab agritech à destination des élèves ingénieurs agronomes ou biologiques de [l'Institut National Polytechnique Félix Houphouët-Boigny](https://inphb.ci).
+
+La formation se déroule typiquement sur cinq jours et réuni autour de 10 étudiants.
+
+Ce manuel est et sera toujours gratuit, sous licence [CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/3.0/us/).
