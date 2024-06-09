@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ebedthan.github.io/mbdr/index.html</loc>
-    <lastmod>2024-06-09T05:33:54.158Z</lastmod>
+    <lastmod>2024-06-09T23:15:04.458Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/intro.html</loc>
-    <lastmod>2024-06-09T23:01:50.415Z</lastmod>
+    <lastmod>2024-06-09T23:15:04.462Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/datasets.html</loc>
-    <lastmod>2024-06-09T23:09:02.853Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/exploration.html</loc>
-    <lastmod>2024-06-09T23:07:34.749Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/regression.html</loc>
-    <lastmod>2024-06-09T23:07:37.393Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/references.html</loc>
-    <lastmod>2024-06-09T10:44:38.098Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/glm.html</loc>
-    <lastmod>2024-06-09T23:09:39.003Z</lastmod>
+    <lastmod>2024-06-09T23:15:04.470Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/organigram.html</loc>
-    <lastmod>2024-06-09T23:09:03.629Z</lastmod>
+    <lastmod>2024-06-09T23:15:04.474Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/exploration.html</loc>
+    <lastmod>2024-06-09T23:15:04.494Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/regression.html</loc>
+    <lastmod>2024-06-09T23:15:04.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/glm.html</loc>
+    <lastmod>2024-06-09T23:15:04.506Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/gam.html</loc>
+    <lastmod>2024-06-09T23:15:04.510Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/references.html</loc>
+    <lastmod>2024-06-09T23:15:04.514Z</lastmod>
   </url>
 </urlset>
