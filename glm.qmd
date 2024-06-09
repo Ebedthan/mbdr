@@ -1,0 +1,6 @@
+# Modèles linéaires généralisés
+
+## GLM Poisson 
+
+## GLM logistique
+

@@ -28,5 +28,14 @@
   "regression.qmd": {
     "regression.html": "34c1a94f",
     "regression.tex": "a5d6cdb4"
+  },
+  "glm.qmd": {
+    "glm.html": "8bfc7706"
+  },
+  "gam.qmd": {
+    "gam.html": "38a8a954"
+  },
+  "organigram.qmd": {
+    "organigram.html": "2a9d4b8a"
   }
 }

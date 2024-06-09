@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="author" content="Anicet Ebou">
-<title>Modélisation des données biologiques avec R - 2&nbsp; Exploration des données</title>
+
+<title>Modélisation des données biologiques avec R - 3&nbsp; Exploration des données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -62,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./regression.html" rel="next">
-<link href="./datasets.html" rel="prev">
+<link href="./organigram.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -71,7 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -90,25 +95,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exploration.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploration des données</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exploration.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploration des données</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Modélisation des données biologiques avec R</a> 
         <div class="sidebar-tools-main">
@@ -128,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bienvenue</span></a>
@@ -148,14 +164,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./organigram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organigramme de relation entre les outils d’analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./exploration.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploration des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploration des données</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,41 +199,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#outils-graphiques" id="toc-outils-graphiques" class="nav-link active" data-scroll-target="#outils-graphiques"><span class="header-section-number">2.1</span> Outils graphiques</a>
+  <li><a href="#outils-graphiques" id="toc-outils-graphiques" class="nav-link active" data-scroll-target="#outils-graphiques"><span class="header-section-number">3.1</span> Outils graphiques</a>
   <ul class="collapse">
-<li><a href="#bo%C3%AEte-%C3%A0-moustache" id="toc-boîte-à-moustache" class="nav-link" data-scroll-target="#bo%C3%AEte-%C3%A0-moustache"><span class="header-section-number">2.1.1</span> Boîte à moustache</a></li>
-  <li><a href="#diagramme-de-points-de-cleveland" id="toc-diagramme-de-points-de-cleveland" class="nav-link" data-scroll-target="#diagramme-de-points-de-cleveland"><span class="header-section-number">2.1.2</span> Diagramme de points de Cleveland</a></li>
-  <li><a href="#histogramme" id="toc-histogramme" class="nav-link" data-scroll-target="#histogramme"><span class="header-section-number">2.1.3</span> Histogramme</a></li>
-  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">2.1.4</span> QQ-plots</a></li>
-  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"><span class="header-section-number">2.1.5</span> Nuage de points</a></li>
-  <li><a href="#pairplots" id="toc-pairplots" class="nav-link" data-scroll-target="#pairplots"><span class="header-section-number">2.1.6</span> Pairplots</a></li>
-  <li><a href="#coplot" id="toc-coplot" class="nav-link" data-scroll-target="#coplot"><span class="header-section-number">2.1.7</span> Coplot</a></li>
-  <li><a href="#diagrammes-de-conception-et-dinteraction" id="toc-diagrammes-de-conception-et-dinteraction" class="nav-link" data-scroll-target="#diagrammes-de-conception-et-dinteraction"><span class="header-section-number">2.1.8</span> Diagrammes de conception et d’interaction</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#valeurs-aberrantes-transformations-et-standardisation" id="toc-valeurs-aberrantes-transformations-et-standardisation" class="nav-link" data-scroll-target="#valeurs-aberrantes-transformations-et-standardisation"><span class="header-section-number">2.2</span> Valeurs aberrantes, transformations et standardisation</a>
+  <li><a href="#boîte-à-moustache" id="toc-boîte-à-moustache" class="nav-link" data-scroll-target="#boîte-à-moustache"><span class="header-section-number">3.1.1</span> Boîte à moustache</a></li>
+  <li><a href="#diagramme-de-points-de-cleveland" id="toc-diagramme-de-points-de-cleveland" class="nav-link" data-scroll-target="#diagramme-de-points-de-cleveland"><span class="header-section-number">3.1.2</span> Diagramme de points de Cleveland</a></li>
+  <li><a href="#histogramme" id="toc-histogramme" class="nav-link" data-scroll-target="#histogramme"><span class="header-section-number">3.1.3</span> Histogramme</a></li>
+  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">3.1.4</span> QQ-plots</a></li>
+  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"><span class="header-section-number">3.1.5</span> Nuage de points</a></li>
+  <li><a href="#pairplots" id="toc-pairplots" class="nav-link" data-scroll-target="#pairplots"><span class="header-section-number">3.1.6</span> Pairplots</a></li>
+  <li><a href="#coplot" id="toc-coplot" class="nav-link" data-scroll-target="#coplot"><span class="header-section-number">3.1.7</span> Coplot</a></li>
+  <li><a href="#diagrammes-de-conception-et-dinteraction" id="toc-diagrammes-de-conception-et-dinteraction" class="nav-link" data-scroll-target="#diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.8</span> Diagrammes de conception et d’interaction</a></li>
+  </ul></li>
+  <li><a href="#valeurs-aberrantes-transformations-et-standardisation" id="toc-valeurs-aberrantes-transformations-et-standardisation" class="nav-link" data-scroll-target="#valeurs-aberrantes-transformations-et-standardisation"><span class="header-section-number">3.2</span> Valeurs aberrantes, transformations et standardisation</a>
   <ul class="collapse">
-<li><a href="#valeurs-aberrantes" id="toc-valeurs-aberrantes" class="nav-link" data-scroll-target="#valeurs-aberrantes"><span class="header-section-number">2.2.1</span> Valeurs aberrantes</a></li>
-  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation"><span class="header-section-number">2.2.2</span> Transformation</a></li>
-  <li><a href="#standardisation" id="toc-standardisation" class="nav-link" data-scroll-target="#standardisation"><span class="header-section-number">2.2.3</span> Standardisation</a></li>
+  <li><a href="#valeurs-aberrantes" id="toc-valeurs-aberrantes" class="nav-link" data-scroll-target="#valeurs-aberrantes"><span class="header-section-number">3.2.1</span> Valeurs aberrantes</a></li>
+  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation"><span class="header-section-number">3.2.2</span> Transformation</a></li>
+  <li><a href="#standardisation" id="toc-standardisation" class="nav-link" data-scroll-target="#standardisation"><span class="header-section-number">3.2.3</span> Standardisation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">3.3</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#même-si-vous-ne-les-voyez-pas-elles-peuvent-être-présentes" id="toc-même-si-vous-ne-les-voyez-pas-elles-peuvent-être-présentes" class="nav-link" data-scroll-target="#même-si-vous-ne-les-voyez-pas-elles-peuvent-être-présentes"><span class="header-section-number">3.3.1</span> Même si vous ne les voyez pas, elles peuvent être présentes</a></li>
+  <li><a href="#prochaines-étapes" id="toc-prochaines-étapes" class="nav-link" data-scroll-target="#prochaines-étapes"><span class="header-section-number">3.3.2</span> Prochaines étapes</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploration des données</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploration des données</span></h1>
 </div>
 
 
@@ -212,7 +251,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p>La phase initiale de l’analyse des données implique une exploration graphique de l’ensemble des données en répondant aux questions suivantes :</p>
+</header>
+
+<p>La phase initiale de l’analyse des données implique une exploration graphique de l’ensemble des données en répondant aux questions suivantes :</p>
 <ul>
 <li>Quelle est la tendance centrale des données ? Comment les données sont-elles distribuées ? La distribution est-elle symétrique, asymétrique ou bimodale ?</li>
 <li>Y a-t-il des valeurs aberrantes dans l’ensemble des données ?</li>
@@ -222,14 +263,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>L’effort d’échantillonnage a-t-il été approximativement égal pour chaque observation ou variable ?</li>
 </ul>
 <p>En explorant systématiquement ces questions, nous pouvons acquérir une compréhension globale des caractéristiques de l’ensemble de données et guider l’orientation des analyses ultérieures.</p>
-<section id="outils-graphiques" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="outils-graphiques">
-<span class="header-section-number">2.1</span> Outils graphiques</h2>
-<section id="boîte-à-moustache" class="level3" data-number="2.1.1"><h3 data-number="2.1.1" class="anchored" data-anchor-id="boîte-à-moustache">
-<span class="header-section-number">2.1.1</span> Boîte à moustache</h3>
-<p>Un diagramme en boîte, ou boîte à moustaches, permet de visualiser la moyenne et la dispersion d’une variable univariée. Normalement, le point central d’un diagramme en boîte est la médiane, mais il peut également s’agir de la moyenne. Les quartiles 25% et 75% (Q25 et Q75) définissent les charnières (extrémités des boîtes), et la différence entre les charnières est appelée l’écart. Des lignes (ou moustaches) sont tracées à partir de chaque charnière jusqu’à 1,5 fois l’écart ou jusqu’à la valeur la plus extrême de l’écart, la plus petite étant retenue. Tous les points situés en dehors de ces valeurs sont normalement identifiés comme des valeurs aberrantes <a href="#fig-boxplot">Figure&nbsp;<span>2.1</span></a>.</p>
+<section id="outils-graphiques" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="outils-graphiques"><span class="header-section-number">3.1</span> Outils graphiques</h2>
+<section id="boîte-à-moustache" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="boîte-à-moustache"><span class="header-section-number">3.1.1</span> Boîte à moustache</h3>
+<p>Un diagramme en boîte, ou boîte à moustaches, permet de visualiser la moyenne et la dispersion d’une variable univariée. Normalement, le point central d’un diagramme en boîte est la médiane, mais il peut également s’agir de la moyenne. Les quartiles 25% et 75% (Q25 et Q75) définissent les charnières (extrémités des boîtes), et la différence entre les charnières est appelée l’écart. Des lignes (ou moustaches) sont tracées à partir de chaque charnière jusqu’à 1,5 fois l’écart ou jusqu’à la valeur la plus extrême de l’écart, la plus petite étant retenue. Tous les points situés en dehors de ces valeurs sont normalement identifiés comme des valeurs aberrantes <a href="#fig-boxplot">Figure&nbsp;<span>3.1</span></a>.</p>
 <div id="fig-boxplot" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="boxplot.png" class="img-fluid figure-img" width="500"></p>
-<figcaption class="figure-caption">Figure&nbsp;2.1: Boîte à moustache</figcaption></figure>
+<figure class="figure">
+<p><img src="boxplot.png" class="img-fluid figure-img" width="500"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: Boîte à moustache</figcaption>
+</figure>
 </div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -238,13 +281,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>La syntaxe générale pour créer la boîte à moustache d’une variable en utilisant base R est: <code>boxplot(variable).</code></p>
-<p>L’aide complète de la fonction <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code> est obtenue par la commande <code>?boxplot()</code>.</p>
+<p>L’aide complète de la fonction <code>boxplot()</code> est obtenue par la commande <code>?boxplot()</code>.</p>
 </div>
 </div>
 </div>
 <p>Etudions la variable <code>body_mass_g</code> en représentant sa boîte à moustache.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, xlab<span class="op">=</span><span class="st">"Masse (g)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">xlab=</span><span class="st">"Masse (g)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -252,14 +295,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>On remarque qu’aucune valeur aberrante n’apparait de façon visible. De plus on observe que la médiane du poids des manchots se situent autour de 4000 g (on peut facilement confirmer cela en calculant la médiane <code>median(penguins$body_mass_g)</code>).</p>
 <p>On peut alors être amenée à continuer l’exploration en étudiant le poids, cette fois-ci en étudiant la variable par espèce de manchot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">species</span>, data<span class="op">=</span><span class="va">penguins</span>, ylab<span class="op">=</span><span class="st">"Masse (g)"</span>, xlab<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(body_mass_g <span class="sc">~</span> species, <span class="at">data=</span>penguins, <span class="at">ylab=</span><span class="st">"Masse (g)"</span>, <span class="at">xlab=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Les boîte à moustaches representées nous permettent de nous rendre compte que l’espèce Gentoo a sensiblement une masse plus élevée que les deux autres. On pourra confirmer si cette différence est significative avec une analyse de variance. De plus, on observe la présence de quelques valeurs aberrantes chez l’espèce Chinstrap.</p>
-</section><section id="diagramme-de-points-de-cleveland" class="level3" data-number="2.1.2"><h3 data-number="2.1.2" class="anchored" data-anchor-id="diagramme-de-points-de-cleveland">
-<span class="header-section-number">2.1.2</span> Diagramme de points de Cleveland</h3>
+</section>
+<section id="diagramme-de-points-de-cleveland" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="diagramme-de-points-de-cleveland"><span class="header-section-number">3.1.2</span> Diagramme de points de Cleveland</h3>
 <p>Les diagrammes de points de Cleveland sont utiles pour identifier les valeurs aberrantes et l’homogénéité.</p>
 <p>L’homogénéité signifie que la variance des données ne change pas le long des gradients. La violation de cette condition est appelée hétérogénéité et l’homogénéité est une hypothèse cruciale pour de nombreuses méthodes statistiques.</p>
 <p>La valeur est présentée sur l’axe horizontal et l’ordre des points (tel qu’il est organisé par le programme) est présenté sur l’axe vertical.</p>
@@ -275,33 +319,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Representons le nuage de point de Cleveland avec pour but d’identifier une possible violation de l’homogénéité ou la présence de valeurs aberrantes. Le diagrammes à points est réalisé en utilisant différents symboles conditionnels à une variable explicative nominale qui est ici l’espèce.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/dotchart.html">dotchart</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, main<span class="op">=</span><span class="st">"Masse (g)"</span>, pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dotchart</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">main=</span><span class="st">"Masse (g)"</span>, <span class="at">pch=</span><span class="fu">as.numeric</span>(penguins<span class="sc">$</span>species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Tout point isolé à droite ou à gauche indique des valeurs aberrantes, mais dans cet jeu de données, en considérant l’ensemble du graphique aucun point n’est considéré comme aberrant, ce qui confirme notre observation de la boîte à moustache. Cependant comme observé plus haut, en prenant les points par groupe (chaque symbole représentant une espèce différente) on observe bien un groupe présentant des valeurs aberrantes.</p>
-</section><section id="histogramme" class="level3" data-number="2.1.3"><h3 data-number="2.1.3" class="anchored" data-anchor-id="histogramme">
-<span class="header-section-number">2.1.3</span> Histogramme</h3>
+</section>
+<section id="histogramme" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="histogramme"><span class="header-section-number">3.1.3</span> Histogramme</h3>
 <p>Un histogramme montre le centre et la distribution des données et donne une indication de la normalité. Toutefois, l’application d’une transformation des données pour les faire correspondre à une distribution normale nécessite des précautions.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Subdivision du panel graphique</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Histrogramme de la masse pour l'ensemble des manchots</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, main<span class="op">=</span><span class="st">"Masse (g)"</span>, xlab<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Histrogramme de la masse pour les males</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">[</span><span class="va">penguins</span><span class="op">$</span><span class="va">sex</span><span class="op">==</span><span class="st">"male"</span><span class="op">]</span>, main<span class="op">=</span><span class="st">"Males"</span>, xlab<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co"># Histrogramme de la masse pour les femelles</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">[</span><span class="va">penguins</span><span class="op">$</span><span class="va">sex</span><span class="op">==</span><span class="st">"female"</span><span class="op">]</span>, main<span class="op">=</span><span class="st">"Females"</span>, xlab<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subdivision du panel graphique</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Histrogramme de la masse pour l'ensemble des manchots</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">main=</span><span class="st">"Masse (g)"</span>, <span class="at">xlab=</span><span class="cn">NULL</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Histrogramme de la masse pour les males</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(penguins<span class="sc">$</span>body_mass_g[penguins<span class="sc">$</span>sex<span class="sc">==</span><span class="st">"male"</span>], <span class="at">main=</span><span class="st">"Males"</span>, <span class="at">xlab=</span><span class="cn">NULL</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Histrogramme de la masse pour les femelles</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(penguins<span class="sc">$</span>body_mass_g[penguins<span class="sc">$</span>sex<span class="sc">==</span><span class="st">"female"</span>], <span class="at">main=</span><span class="st">"Females"</span>, <span class="at">xlab=</span><span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>La forme de l’histogramme montre une certaine asymétrie et l’on pourrait être tenté d’appliquer une transformation. Cependant, un histogramme conditionnel donne une image assez différente. Dans un histogramme conditionnel, les données sont divisées en fonction d’une variable nominale et les histogrammes des sous-ensembles sont tracés côte-à-côte. A ce moment on obtient une figure tout autre montrant une bimodalité aussi bien chez les males que chez les femelles manchots. On a une différence claire du centre de la distribution et la pic initial de données observé sur le premier histogramme est grandement du aux femelles. Il faudrait donc explorer les effets du sexe sur le poids des manchots ainsi que les interactions avant d’envisager une transformation des données.</p>
-</section><section id="qq-plots" class="level3" data-number="2.1.4"><h3 data-number="2.1.4" class="anchored" data-anchor-id="qq-plots">
-<span class="header-section-number">2.1.4</span> QQ-plots</h3>
+</section>
+<section id="qq-plots" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="qq-plots"><span class="header-section-number">3.1.4</span> QQ-plots</h3>
 <p>Un graphique Quantile-Quantile (QQ-plots) est un outil graphique utilisé pour déterminer si les données suivent une distribution particulière. Le graphique QQ pour une distribution normale compare la distribution d’une variable donnée à la distribution gaussienne. Si les points obtenus se situent approximativement sur une ligne droite, on considère que la distribution des données est la même que celle d’une variable normalement distribuée.</p>
 <p>Le <span class="math inline">\(p\)</span>-ème quantile <span class="math inline">\(q\)</span> d’une variable aléatoire <span class="math inline">\(y\)</span> est donnée par <span class="math inline">\(F(q) = P(y \leq q) = p\)</span>. Si l’on souhaire savoir quelle valeur de <span class="math inline">\(q\)</span> appartient à <span class="math inline">\(p\)</span>, on inverse la formule précédente pour obtenir <span class="math inline">\(q = F^{-1}(p)\)</span>. Supposons que nous avons cinq observations <span class="math inline">\(Y_i\)</span> avec les valeurs 1, 2, 3, 4, 5. Par définition, le premier chiffre est le 0% percentile, le milieu est le 50% percentile et 5 est le 100% percentile. La différence entre un quantile et un percentile est un seulement le facteur 100. Les QQ-plots sont soit basés sur les percentiles ou typiquement sur les points quantiles de l’échantillon définis par <span class="math inline">\((i-0.5)/n\)</span> où <span class="math inline">\(i\)</span> varie de 1 à 5 et <span class="math inline">\(n=5\)</span> dans notre example. Ainsi pour notre exemple, les points de quantiles de l’échantillon sont 0,1, 0,3, 0,5, 0,7 et 0,9. Ce sont les valeurs de <span class="math inline">\(p\)</span> pour l’échantillon. Dans la séconde étape, ces quantiles de l’échantillon sont comparés à une distribution normale. Celà signifie que la fonction de densité <span class="math inline">\(P(y\leq q)\)</span> est désormais une fonction de densité normale et <span class="math inline">\(F()\)</span> est désormais la fonction de répartition de la loi normale.</p>
 <p>Le QQ-plot est donc un graphique des valeurs de <span class="math inline">\(Y_i\)</span> de l’échantillon comparés aux <span class="math inline">\(q_i\)</span>. On peut ajouter à ce graphique dans R, une ligne qui connecte les 25e et le 75e quartiles.</p>
@@ -309,99 +355,228 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Il est très souvent utilse de combiner les QQ-plots avec des transformations de puissance, qui est donnée par <span class="math display">\[ \frac{Y^p - 1}{p}, \forall p \neq 0; log(Y) , p = 0\]</span></p>
 <p>Veuillez noter que le <span class="math inline">\(p\)</span> utilisé ici n’est pas le <span class="math inline">\(p\)</span> utilisé pour décrire les quantiles. Il est aussi utile de comparer plusieurs QQ-plots pour différentes valeurs de <span class="math inline">\(p\)</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Transformation racine carrée</span></span>
-<span><span class="va">bmsq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span>
-<span><span class="co"># Transformation racine quatrième</span></span>
-<span><span class="va">bmfq</span> <span class="op">&lt;-</span> <span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">^</span><span class="op">(</span><span class="fl">0.25</span><span class="op">)</span></span>
-<span><span class="co"># Transformation logarithmique</span></span>
-<span><span class="va">bmlog</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation racine carrée</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bmsq <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(penguins<span class="sc">$</span>body_mass_g)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation racine quatrième</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>bmfq <span class="ot">&lt;-</span> penguins<span class="sc">$</span>body_mass_g<span class="sc">^</span>(<span class="fl">0.25</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation logarithmique</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>bmlog <span class="ot">&lt;-</span> <span class="fu">log</span>(penguins<span class="sc">$</span>body_mass_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Dans le graphique ci-dessous, aucune transormation semble prendre le dessus sur l’autre.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, main<span class="op">=</span><span class="st">"Aucune transformation (p=0)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">bmsq</span>, main<span class="op">=</span><span class="st">"Racine carré (p=0.5)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">bmsq</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">bmfq</span>, main<span class="op">=</span><span class="st">"Racine quatrième (p=0.25)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">bmfq</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">bmlog</span>, main<span class="op">=</span><span class="st">"Logarithme (p=1)"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">bmlog</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">layout</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">main=</span><span class="st">"Aucune transformation (p=0)"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(penguins<span class="sc">$</span>body_mass_g)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(bmsq, <span class="at">main=</span><span class="st">"Racine carré (p=0.5)"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(bmsq)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(bmfq, <span class="at">main=</span><span class="st">"Racine quatrième (p=0.25)"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(bmfq)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(bmlog, <span class="at">main=</span><span class="st">"Logarithme (p=1)"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(bmlog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="nuage-de-points" class="level3" data-number="2.1.5"><h3 data-number="2.1.5" class="anchored" data-anchor-id="nuage-de-points">
-<span class="header-section-number">2.1.5</span> Nuage de points</h3>
+</section>
+<section id="nuage-de-points" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="nuage-de-points"><span class="header-section-number">3.1.5</span> Nuage de points</h3>
 <p>Jusqu’à présent, l’accent a été mis sur la détection des valeurs aberrantes, la vérification de la normalité et l’exploration d’ensembles de données associés à des variables explicatives nominales uniques. Les techniques suivantes s’intéressent aux relations entre plusieurs variables. Un nuage de points est un outil permettant de trouver une relation entre deux variables. Il représente une variable sur l’axe horizontal et une seconde variable sur l’axe vertical. Pour aider à visualiser la relation entre les variables, une ligne droite ou une courbe de lissage est souvent ajoutée au graphique.</p>
+<p>La figure suivante montre le nuage de points entre les variables <code>flipper_length_mm</code> (taille de la nageoire) et <code>body_mass_g</code> (masse du manchot).</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">flipper_length_mm</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, xlab<span class="op">=</span><span class="st">"Taille des nageoires"</span>, ylab<span class="op">=</span><span class="st">"Masse (g)"</span><span class="op">)</span></span>
-<span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">flipper_length_mm</span>, data<span class="op">=</span><span class="va">penguins</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(penguins<span class="sc">$</span>flipper_length_mm, penguins<span class="sc">$</span>body_mass_g, <span class="at">xlab=</span><span class="st">"Taille des nageoires"</span>, <span class="at">ylab=</span><span class="st">"Masse (g)"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(body_mass_g <span class="sc">~</span> flipper_length_mm, <span class="at">data=</span>penguins)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="pairplots" class="level3" data-number="2.1.6"><h3 data-number="2.1.6" class="anchored" data-anchor-id="pairplots">
-<span class="header-section-number">2.1.6</span> Pairplots</h3>
+</section>
+<section id="pairplots" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="pairplots"><span class="header-section-number">3.1.6</span> Pairplots</h3>
 <p>Si vous avez plus de deux variables, vous pouvez produire une série de nuage de points : un pour chaque paire de variables. Cependant, le nombre de diagrammes augmente rapidement si vous avez plus de trois variables à explorer. Une meilleure approche, jusqu’à environ 10 variables explicatives, est le diagramme de paires encore appelée matrice de nuage de points. Ces diagrammes présentent plusieurs nuage de points par paire dans un seul graphique et peuvent être utilisés pour détecter les relations entre les variables et pour détecter la colinéarité.</p>
+<p>La figure suivante montre un pairplot entre les variables <code>body_mass_g</code>, <code>flipper_length_mm</code>, <code>bill_length_mm</code> et <code>bill_depth_mm</code>. Chaque sous-graphique est un nuage de points entre deux variables, avec les etiquettes de chaque variable ajoutée dans la diagonale.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># penguins[3:6] sélectionne les variables bill_length_mm</span></span>
-<span><span class="co"># bill_depth_mm, flipper_length_mm, body_mass_g</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># penguins[3:6] sélectionne les variables bill_length_mm</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># bill_depth_mm, flipper_length_mm, body_mass_g</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(penguins[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="coplot" class="level3" data-number="2.1.7"><h3 data-number="2.1.7" class="anchored" data-anchor-id="coplot">
-<span class="header-section-number">2.1.7</span> Coplot</h3>
-<p>Un coplot est un nuage de points conditionnel montrant la relation entre y et x, pour différentes valeurs d’une troisième variable z, voire d’une quatrième variable w. Les variables conditionnelles peuvent être nominales ou continues.</p>
+<p>Il est aussi possible d’ajouter une droite ajustée à chaque graphique.</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/coplot.html">coplot</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">flipper_length_mm</span> <span class="op">|</span> <span class="va">species</span>, data <span class="op">=</span> <span class="va">penguins</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(penguins[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>], <span class="at">panel=</span>panel.smooth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploration_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>On parle de colinéarité lorsqu’il existe une forte corrélation entre deux (ou plus) variables.</p>
+<p>La figure ci-dessous montre un autre pairplot du même jeu de donnée sur lequel nous avons, cette fois-ci ajouté les coefficients de corrélation entre les variables dans le triangle bas du pairplot.</p>
+<p>Pour cela, nous utiliserons une fonction <code>panel.cor</code> définie comme suit:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>panel.cor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">digits=</span><span class="dv">1</span>, <span class="at">prefix=</span><span class="st">""</span>, cex.cor) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  usr <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="st">"usr"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">par</span>(usr))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">par</span>(<span class="at">usr=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  r1 <span class="ot">&lt;-</span> <span class="fu">cor</span>(x, y, <span class="at">use=</span><span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">abs</span>(<span class="fu">cor</span>(x, y, <span class="at">use=</span><span class="st">"pairwise.complete.obs"</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  txt <span class="ot">&lt;-</span> <span class="fu">format</span>(<span class="fu">c</span>(r1, <span class="fl">0.123456789</span>), <span class="at">digits=</span>digits)[<span class="dv">1</span>]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  txt <span class="ot">&lt;-</span> <span class="fu">paste</span>(prefix, txt, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">missing</span>(cex.cor)) {</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    cex <span class="ot">&lt;-</span> <span class="fl">0.9</span><span class="sc">/</span><span class="fu">strwidth</span>(txt)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">text</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, txt, <span class="at">cex =</span> cex <span class="sc">*</span> r)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Par la suite le diagramme est construit en faisant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(penguins[,<span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>], <span class="at">lower.panel=</span>panel.cor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Il faut noter qu’il existe une forte colinéarité entre la taille de la nageoire et la masse du manchot.</p>
+<p>Des diagrammes en paires doivent être établis pour chaque analyse. Ils doivent comprendre (i) un diagramme par paire de toutes les variables de réponse (en supposant que plus d’une variable de réponse soit disponible) ; (ii) un diagramme par paire de toutes les variables explicatives ; et (iii) un diagramme par paire de toutes les variables de réponse et de toutes les variables explicatives.</p>
+<p>Le premier graphique (i) fournit des informations qui aideront à choisir les techniques multivariées les plus appropriées. On espère que les variables de réponse présenteront de fortes relations linéaires (certaines techniques telles que l’ACP dépendent de relations linéaires). Toutefois, si le graphique (ii) montre une relation linéaire claire entre les variables explicatives, indiquant une colinéarité, nous savons que nous avons un problème majeur à résoudre avant de poursuivre l’analyse.</p>
+<p>Le graphique (iii) permet de déterminer si les relations entre les variables de réponse et les variables explicatives sont linéaires. Si ce n’est pas le cas, plusieurs options s’offrent à nous. La plus simple consiste à appliquer une transformation aux variables de réponse et/ou explicatives afin de linéariser les relations.</p>
+<p>D’autres options seront explorée le long du séminaire.</p>
+</section>
+<section id="coplot" class="level3" data-number="3.1.7">
+<h3 data-number="3.1.7" class="anchored" data-anchor-id="coplot"><span class="header-section-number">3.1.7</span> Coplot</h3>
+<p>Un coplot est un nuage de points conditionnel montrant la relation entre y et x, pour différentes valeurs d’une troisième variable z, voire d’une quatrième variable w. Les variables conditionnelles peuvent être nominales ou continues.</p>
+<p>La figure suivante présente un coplot entre la masse des manchots et la taille de leur nageoire conditionée par la variable nominale espèce.</p>
+<p>Les panneaux sont classés de la partie inférieure gauche à la partie supérieure droite. Cet ordre correspond à des valeurs croissantes de la variable explicative du conditionnement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coplot</span>(body_mass_g <span class="sc">~</span> flipper_length_mm <span class="sc">|</span> species, <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  Missing rows: 4, 272 </code></pre>
 </div>
 </div>
-</section><section id="diagrammes-de-conception-et-dinteraction" class="level3" data-number="2.1.8"><h3 data-number="2.1.8" class="anchored" data-anchor-id="diagrammes-de-conception-et-dinteraction">
-<span class="header-section-number">2.1.8</span> Diagrammes de conception et d’interaction</h3>
-<p>Les diagrammes de conception et d’interaction sont un autre outil précieux pour explorer les ensembles de données avec des variables nominales et sont particulièrement utiles à utiliser avant d’appliquer la régression, la GLM, la modélisation mixte ou l’ANOVA. Ils permettent de visualiser (i) les différences entre les valeurs moyennes de la variable réponse pour différents niveaux de variables nominales et (ii) les interactions entre les variables explicatives.</p>
+</section>
+<section id="diagrammes-de-conception-et-dinteraction" class="level3" data-number="3.1.8">
+<h3 data-number="3.1.8" class="anchored" data-anchor-id="diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.8</span> Diagrammes de conception et d’interaction</h3>
+<p>Les diagrammes de conception et d’interaction sont un autre outil précieux pour explorer les ensembles de données avec des variables nominales et sont particulièrement utiles à utiliser avant d’appliquer la régression, la GLM, la modélisation mixte ou l’analyse de variance.</p>
+<p>Ils permettent de visualiser (i) les différences entre les valeurs moyennes de la variable réponse pour différents niveaux de variables nominales et (ii) les interactions entre les variables explicatives.</p>
+<p>La figure suivante montre un diagramme de conception entre la masse des manchots et les trois variables nominale du jeu de données: <code>species</code>, <code>sex</code> et <code>island</code>. Il nous permet de comparer directement les moyennes (ou médianes) de chaque variable nominale en utilisant un seul graphique.</p>
+<p>Le graphique nous montre que la masse moyenne de l’espèce Gentoo est située autour de 5100g et est sensiblement plus élevée que celle de Chinstrap et Adélie. De même on peut aussi remarquer que la masse moyenne des mâles est plus grande que celle des femelles.</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.design.html">plot.design</a></span><span class="op">(</span><span class="va">body_mass_g</span> <span class="op">~</span> <span class="va">species</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">island</span>, data <span class="op">=</span> <span class="va">penguins</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.design</span>(body_mass_g <span class="sc">~</span> species <span class="sc">+</span> sex <span class="sc">+</span> island, <span class="at">data =</span> penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="exploration_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="exploration_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Cependant, les diagrammes de conception ne nous permettent pas d’explorer les interactions <em>entre</em> les variables explicatives, d’où la nécessité d’utiliser les diagrammes d’interactions.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Interprétation d’un diagramme d’interaction</strong></p>
+<ol type="1">
+<li><p><strong>Identifier les facteurs et les niveaux</strong>: observez l’abscisse pour identifier les niveaux du premier facteur et l’ordonnée pour identifier les niveaux du deuxième facteur.</p></li>
+<li><p><strong>Évaluer le parallélisme des lignes</strong>: si les lignes sont parallèles, cela signifie qu’il n’y a pas d’interaction entre les facteurs; l’effet d’un facteur est constant pour tous les niveaux de l’autre facteur. Cependant, si les lignes ne sont pas parallèles (c’est-à-dire qu’elles se croisent ou divergent), cela indique une interaction entre les facteurs. L’effet d’un facteur dépend alors du niveau de l’autre facteur.</p></li>
+<li><p><strong>Ampleur de l’interaction</strong>: le degré de divergence ou de convergence des lignes peut donner une indication de la force de l’interaction. Une divergence ou une convergence plus importante indique un effet d’interaction plus fort.</p></li>
+<li><p><strong>Direction des effets</strong>: observez si la variable de réponse augmente ou diminue avec les changements de niveau des facteurs. Cela peut aider à déterminer la nature de l’interaction et des effets principaux.</p></li>
+</ol>
+<p><strong>Pour résumer</strong></p>
+<ul>
+<li><p><strong>Pas d’interaction</strong>: les lignes parallèles suggèrent que les deux facteurs n’interagissent pas. Les effets principaux de chaque facteur sont additifs.</p></li>
+<li><p><strong>Interaction présente</strong>: les lignes non parallèles indiquent une interaction entre les facteurs, ce qui signifie que l’effet d’un facteur dépend du niveau de l’autre facteur.</p></li>
+<li><p><strong>Force et direction</strong>: le degré de divergence ou de convergence et la direction des lignes donnent des indications sur la force et la nature de l’interaction.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Le premier diagrame d’interaction ci-dessous montre l’interaction entre l’espèce et le sexe. On observe qu’il n’y a une interaction entre le sexe et la masse des manchots, ce qui signifie que la masse dépend du sexe et de l’espèce de manchot.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">species</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">sex</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(penguins<span class="sc">$</span>species, penguins<span class="sc">$</span>sex, penguins<span class="sc">$</span>body_mass_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="exploration_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="exploration_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Le second diagramme montre l’interaction entre l’île (l’habitat du manchot), le sexe et la masse. On observe qu’il existe aussi une interaction entre ces variables.</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/interaction.plot.html">interaction.plot</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">sex</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">island</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(penguins<span class="sc">$</span>sex, penguins<span class="sc">$</span>island, penguins<span class="sc">$</span>body_mass_g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="exploration_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="exploration_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section></section><section id="valeurs-aberrantes-transformations-et-standardisation" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="valeurs-aberrantes-transformations-et-standardisation">
-<span class="header-section-number">2.2</span> Valeurs aberrantes, transformations et standardisation</h2>
-<section id="valeurs-aberrantes" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="valeurs-aberrantes">
-<span class="header-section-number">2.2.1</span> Valeurs aberrantes</h3>
-<p>Une valeur aberrante est un point de données qui, en raison de sa valeur extrême par rapport au reste de l’ensemble de données, peut influencer incorrectement une analyse. La première question qui se pose est donc la suivante : « Comment identifier une valeur aberrante ? Une approche simple pourrait consister à quantifier tout ce qui est aberrant au-delà d’une certaine distance par rapport au centre des données.</p>
-</section><section id="transformation" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="transformation">
-<span class="header-section-number">2.2.2</span> Transformation</h3>
-<p>Il existe de nombreuses raisons de transformer les données, mais c’est généralement parce que les données présentent des valeurs extrêmes aberrantes et des distributions non normales. La transformation des données (sur les variables de réponse) sera également nécessaire lorsque vous prévoyez d’utiliser l’analyse discriminante et qu’il existe des preuves évidentes (par exemple, en utilisant un diagramme en pointillés de Cleveland) de l’hétérogénéité.</p>
+</section>
+</section>
+<section id="valeurs-aberrantes-transformations-et-standardisation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="valeurs-aberrantes-transformations-et-standardisation"><span class="header-section-number">3.2</span> Valeurs aberrantes, transformations et standardisation</h2>
+<section id="valeurs-aberrantes" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="valeurs-aberrantes"><span class="header-section-number">3.2.1</span> Valeurs aberrantes</h3>
+<p>Une valeur aberrante est un point de données qui, en raison de sa valeur extrême par rapport au reste de l’ensemble de données, peut influencer incorrectement une analyse. La première question qui se pose est donc la suivante: “Comment identifier une valeur aberrante?” Une approche simple pourrait consister à quantifier tout ce qui est aberrant au-delà d’une certaine distance par rapport au centre des données. On pourrait par exemple considérer les points situés en dehors des charnières d’un diagramme en boîte comme des valeurs aberrantes. Cependant, si la quantité des données n’est pas suffisante, il pourrait être difficile de considérer ces valeurs comme abberantes.</p>
+<p>Les nuages de points peuvent aussi nous permettre d’identifier les valeurs aberrantes. Ainsi, même si une observation n’est pas considérée comme aberrante dans l’espace x ou dans l’espace y (alors possiblement identifiée par une boîte à moustache), elle peut l’être dans l’espace xy. La situation dans laquelle une observation est une valeur aberrante dans l’espace x, ainsi que dans l’espace y, mais pas dans l’espace xy, est également possible.</p>
+<p>Pour résumer la détection des valeurs aberrantes peut rapidemment devenir difficile, cependant l’analyse pourrait permettre d’y voir plus clair.</p>
+</section>
+<section id="transformation" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="transformation"><span class="header-section-number">3.2.2</span> Transformation</h3>
+<section id="quelques-transformations-usuelles" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="quelques-transformations-usuelles"><span class="header-section-number">3.2.2.1</span> Quelques transformations usuelles</h4>
+<p>Il existe de nombreuses raisons de transformer les données, mais c’est généralement parce que les données présentent des valeurs aberrantes et des distributions non normales. La transformation des données (sur les variables de réponse) sera également nécessaire lorsque vous prévoyez d’utiliser l’analyse discriminante et qu’il existe des preuves évidentes (par exemple, en utilisant un diagramme en pointillés de Cleveland) d’hétérogénéité.</p>
 <p>De plus, le choix de la transformation est influencée par le choix de l’analyse de suivi. Pour certaines techniques, telles que les arbres de classification ou de régression, la transformation des variables explicatives ne change rien aux résultats. Cependant, la plupart des techniques peuvent nécessiter une certaine transformation des données brutes avant l’analyse.</p>
-</section><section id="standardisation" class="level3" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="standardisation">
-<span class="header-section-number">2.2.3</span> Standardisation</h3>
-<p>Si les variables comparées proviennent d’échelles très différentes, comme la comparaison des taux de croissance de petites espèces de poissons avec ceux de grandes espèces de poissons, la standardisation (conversion de toutes les variables à la même échelle) peut être une option. Toutefois, cela dépend de la technique statistique utilisée.</p>
+<p>Le problème le plus facile à résoudre est celui où les observations extrêmes identifiées au cours de l’étape d’exploration des données s’avèrent être des erreurs de frappe. Nous supposerons toutefois que cette solution facile n’existe pas et que nous disposons d’un ensemble de données contenant de véritables observations extrêmes. Si ces observations extrêmes se trouvent dans les variables explicatives, une transformation des variables explicatives (continues) est certainement nécessaire, en particulier si l’on applique des techniques de régression, d’analyse de la covariance, de GLM, de GAM ou des techniques multivariées telles que l’analyse de la redondance et l’analyse canonique des correspondances.</p>
+<p>Lorsque les observations extrêmes se trouvent dans la variable réponse, plusieurs approches sont possibles. Vous pouvez soit transformer les données, soit appliquer une technique légèrement plus performante pour traiter les valeurs extrêmes, comme un GLM ou un GAM avec une distribution de Poisson. Cette dernière méthode ne fonctionne que s’il y a une augmentation de la dispersion des données observées pour des valeurs plus élevées. Il est également possible d’utiliser des modèles de quasi-Poisson si les données sont trop dispersées.</p>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Vous ne devez jamais appliquer une racine carrée ou une transformation logarithmique à la variable réponse, puis continuer avec un modèle GLM de Poisson, car cela applique la correction deux fois.</p>
+</div>
+</div>
+</div>
+<p>Une solution plus radicale pour les observations extrêmes consiste à les omettre purement et simplement de l’analyse. Toutefois, si vous adoptez cette approche, vous devez toujours fournir les résultats de l’analyse avec et sans les observations extrêmes. Si les grandes valeurs proviennent toutes d’une région, d’un mois ou d’un sexe, il est possible d’utiliser différentes composantes de variance dans le modèle de régression linéaire, ce qui permet d’obtenir des moindres carrés généralisés (GLS).</p>
+<p>Supossons par exemple que nous souhaitons faire une regression linéaire. Le diagramme de points de Cleveland ou les boîtes à moustaches nous indiquent qu’il n’y a pas de valeurs aberrantes préoccupantes, mais le nuage de points d’une variable réponse et d’une variable explicative montre une relation non linéaire évidente. Dans ce cas, nous devrions envisager de transformer l’une des variables ou les deux. Mais quelle transformation utiliser ? L’éventail des transformations possibles pour les variables réponse et explicative peut être choisi parmi les suivantes <span class="math display">\[ y^{\frac{1}{4}}, y^{\frac{1}{3}}, y^{\frac{1}{2}}, y, log(y), y^2, y^3, y^4, ..\]</span></p>
+<p>Ces transformations sont des cas particulier de la transformation de puissance de Box-Cox qui est une famille de transformation qui ne peuvent être appliquée que sur les données non-négatives.</p>
+<p>Une autre alternative est d’utiliser la transformation en rang (méthode utilisée par la plupart des méthodes non paramétrique) ou la transformation en données binaires. Par exemple, en supposant que l’on a la série statistique suivante 2, 7, 4, 9, 22, 40, la transformation en rang va donner 1, 3, 2, 4, 5, 6. Si l’on a la série statistique 0, 1, 3, 0, 4, 0, 100 alors la transformation en série binaire va donner 0, 1, 1, 0, 1, 0, 1.</p>
+</section>
+<section id="stratégies-pour-le-choix-dune-transformation" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="stratégies-pour-le-choix-dune-transformation"><span class="header-section-number">3.2.2.2</span> Stratégies pour le choix d’une transformation</h4>
+<p>Il existe plusieurs stratégies pour le choix de la transformation la plus appropriée. Nous présentons ici deux d’entre elles: essai-erreur et la règle de Mosteller-Tukey.</p>
+<p>La transformation par essai-erreur est le fait de tester différentes transformation et de visualiser les résultats à l’aide des outils graphiques présentés ci-dessus afin d’effectuer la sélection de la meilleure transformation. En utilisant cette méthode, il es important de reporter les résultats incluant aussi bien les transformations réussies que celles qui ont échouées.</p>
+<p>Lorsque l’analyse qui suivra nécessite des relations linéaire entre les variables, la règle de Mosteller-Tukey <a href="#fig-mosteller">Figure&nbsp;<span>3.2</span></a> qui appartient à la famille des transformations de Box-Cox.</p>
+<div id="fig-mosteller" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="tukey_mosteller.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.2: Mosteller-Tukey bulging rule</figcaption>
+</figure>
+</div>
+<p>Cette approche est basée sur l’identification des motifs non-linéaires par l’inspection des nuages de points. Les transformations requises peuvent alors être inférée du graphique <a href="#fig-mosteller">Figure&nbsp;<span>3.2</span></a>.</p>
+<p>Par exemple, si la forme du nuage de points est similaire à la forme du quadrant en bas à gauche de la figure <a href="#fig-mosteller">Figure&nbsp;<span>3.2</span></a>, alors soit if faudra effectuer une transformation <span class="math inline">\(x^2\)</span> ou <span class="math inline">\(x^3\)</span> de la variable explicative ou effectuer une transformation <span class="math inline">\(log(y)\)</span> ou <span class="math inline">\(y^{0.5}\)</span> de la variable réponse.</p>
+</section>
+</section>
+<section id="standardisation" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="standardisation"><span class="header-section-number">3.2.3</span> Standardisation</h3>
+<p>Si les variables comparées proviennent d’échelles très différentes, comme la comparaison des taux de croissance de petites espèces de poissons avec ceux de grandes espèces de poissons, la standardisation (conversion de toutes les variables à la même échelle) peut être une option. Toutefois, cela dépend de la technique statistique utilisée. Il existe plusieurs méthodes pour convertir les données à la même échelle, et une option consiste à centrer toutes les variables autour de zéro par <span class="math display">\[ Y_i^{new} = Y_i - \bar{Y} \]</span> où <span class="math inline">\(\bar{Y}\)</span> est la moyenne de l’échantillon et <span class="math inline">\(Y_i\)</span> est la valeur de la i-ème observation. Cependant la standardisation la plus utilisée est donnée par <span class="math display">\[ Y_i^{new} = (Y_i - \bar{Y}) / s_y \]</span> où <span class="math inline">\(s_y\)</span> est l’écart type de l’échanitllon. Les valeurs obtenues sont alors centrées autour de zéro, avec une variance de 1, et sont sans unités. Cette transformation est aussi appelée normalisation.</p>
+<p>Comme pour les autres transformations, la décision de standardiser vos données dépend de la technique statistique que vous envisagez d’utiliser. Par exemple, si vous souhaitez comparer des paramètres de régression, vous pouvez juger utile de normaliser les variables explicatives avant l’analyse, en particulier si elles sont exprimées dans des unités différentes ou si elles ont des intervalles différents. Certaines techniques, telles que l’analyse en composantes principales, normalisent ou centrent automatiquement les variables.</p>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">3.3</span> Conclusion</h2>
+<section id="même-si-vous-ne-les-voyez-pas-elles-peuvent-être-présentes" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="même-si-vous-ne-les-voyez-pas-elles-peuvent-être-présentes"><span class="header-section-number">3.3.1</span> Même si vous ne les voyez pas, elles peuvent être présentes</h3>
+<p>Même si les nuages de points suggèrent l’absence de relation entre Y et X, cela ne signifie pas nécessairement qu’il n’en existe pas. Un nuage de points ne montre que la relation entre deux variables, et l’inclusion d’une troisième, d’une quatrième ou même d’une cinquième variable peut conduire à une conclusion différente.</p>
+</section>
+<section id="prochaines-étapes" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="prochaines-étapes"><span class="header-section-number">3.3.2</span> Prochaines étapes</h3>
+<p>Une fois l’exploration des données terminée, l’étape suivante consiste à vérifier et à étudier les modèles et les relations que cette étape a permis d’identifier. Si le nuage de points indique une relation linéaire entre les variables, la régression linéaire est l’étape suivante évidente. Toutefois, si le nuage de points suggère un modèle non linéaire clair, une approche différente doit être adoptée, qui peut inclure (i) l’utilisation d’interactions et/ou de termes quadratiques dans le modèle de régression linéaire, (ii) la transformation des données, (iii) la poursuite avec un modèle de régression non linéaire, (iii) l’utilisation d’une modélisation linéaire généralisée, (iv) l’application de techniques de modélisation additive généralisée, ou (v) l’application de techniques de modélisation mixtes (additives). Toutes ces approches sont étudiées dans les chapitres suivants. La première option consiste à utiliser le modèle de régression linéaire, mais il faut s’assurer que toutes les hypothèses sont respectées (par exemple, pas de modèles résiduels). Pour choisir l’approche la plus appropriée, il faut connaître les hypothèses des méthodes sélectionnées et disposer d’outils permettant de détecter les violations (à l’aide des résidus). Tous ces éléments sont abordés dans les chapitres suivants, mais tout se résume à quelque chose de très fondamental : apprenez de vos erreurs.</p>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -633,19 +808,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./datasets.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation des jeux de données</span></span>
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./organigram.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organigramme de relation entre les outils d’analyse</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./regression.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">Modélisation des données biologiques avec R écris par Anicet Ebou</div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -655,6 +833,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 </body></html>

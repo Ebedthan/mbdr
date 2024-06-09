@@ -1,5 +1,5 @@
 project:
-  type: website
+  type: book
   output-dir: docs
 
 website:
@@ -10,8 +10,15 @@ website:
 
 book:
   title: "Modélisation des données biologiques avec R"
+  reader-mode: true
+  
+  page-footer:
+    left: |
+      Modélisation des données biologiques avec R écris par Anicet Ebou
   author: "Anicet Ebou"
-  date: "6/3/2024"
+  site-url: https://ebedthan.github.io/mbdr/
+  repo-url: https://github.com/Ebedthan/mbdr/
+  repo-branch: main
   chapters:
     - index.qmd
     - intro.qmd
@@ -25,6 +32,8 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    author-meta: "Anicet Ebou"
+    callout-appearance: simple
 
 editor: visual
 

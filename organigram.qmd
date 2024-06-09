@@ -1,0 +1,7 @@
+# Organigramme de relation entre les outils d'analyse
+
+Nous présentons ici un organigramme montrant comment la régression linéaire, la modélisation additive, la modélisation linéaire généralisée (utilisant la distribution de Poisson et la fonction log-link) et la modélisation additive généralisée (utilisant la distribution de Poisson) sont liées les unes aux autres.
+
+![Organigramme des outils d'analyse](univariate_analysis.png){fig-align="center"}
+
+Dans la régression linéaire, la violation de l'homogénéité signifie que le GLM avec une distribution de Poisson peut être utilisé. La normalité mais les relations non linéaires (détectées par exemple par un graphique des résidus en fonction de chaque variable explicative) signifient que la modélisation additive peut être appliquée. Des relations non linéaires et une violation de l'hypothèse de normalité signifient qu'une GAM avec une distribution de Poisson peut être utilisée. Le graphique changera si une autre fonction de liaison ou une autre distribution est utilisée.
