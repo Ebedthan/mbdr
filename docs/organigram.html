@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -194,12 +213,17 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="univariate_analysis.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Organigramme des outils d’analyse</figcaption>
+<figcaption class="figure-caption">Organigramme des outils d’analyse. Adapté de <span class="citation" data-cites="zuur2007analysing">(<a href="references.html#ref-zuur2007analysing" role="doc-biblioref">Zuur et al. 2007</a>)</span></figcaption>
 </figure>
 </div>
-<p>Dans la régression linéaire, la violation de l’homogénéité signifie que le GLM avec une distribution de Poisson peut être utilisé. La normalité mais les relations non linéaires (détectées par exemple par un graphique des résidus en fonction de chaque variable explicative) signifient que la modélisation additive peut être appliquée. Des relations non linéaires et une violation de l’hypothèse de normalité signifient qu’une GAM avec une distribution de Poisson peut être utilisée. Le graphique changera si une autre fonction de liaison ou une autre distribution est utilisée.</p>
+<p>Dans la régression linéaire, la violation de l’homogénéité signifie que le GLM (modèle linéaire généralisé) avec une distribution de Poisson peut être utilisé. La normalité mais les relations non linéaires (détectées par exemple par un graphique des résidus en fonction de chaque variable explicative) signifient que la modélisation additive peut être appliquée. Des relations non linéaires et une violation de l’hypothèse de normalité signifient qu’un GAM (modèles additif) avec une distribution de Poisson peut être utilisée. Le graphique changera si une autre fonction de liaison ou une autre distribution est utilisée.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-zuur2007analysing" class="csl-entry" role="listitem">
+Zuur, Alain F, Elena N Ieno, Graham M Smith, et al. 2007. <em>Analysing Ecological Data</em>. Vol. 680. Springer.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

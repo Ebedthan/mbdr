@@ -212,12 +212,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#boîte-à-moustache" id="toc-boîte-à-moustache" class="nav-link" data-scroll-target="#boîte-à-moustache"><span class="header-section-number">3.1.1</span> Boîte à moustache</a></li>
   <li><a href="#diagramme-de-points-de-cleveland" id="toc-diagramme-de-points-de-cleveland" class="nav-link" data-scroll-target="#diagramme-de-points-de-cleveland"><span class="header-section-number">3.1.2</span> Diagramme de points de Cleveland</a></li>
-  <li><a href="#histogramme" id="toc-histogramme" class="nav-link" data-scroll-target="#histogramme"><span class="header-section-number">3.1.3</span> Histogramme</a></li>
-  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">3.1.4</span> QQ-plots</a></li>
-  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"><span class="header-section-number">3.1.5</span> Nuage de points</a></li>
-  <li><a href="#pairplots" id="toc-pairplots" class="nav-link" data-scroll-target="#pairplots"><span class="header-section-number">3.1.6</span> Pairplots</a></li>
-  <li><a href="#coplot" id="toc-coplot" class="nav-link" data-scroll-target="#coplot"><span class="header-section-number">3.1.7</span> Coplot</a></li>
-  <li><a href="#diagrammes-de-conception-et-dinteraction" id="toc-diagrammes-de-conception-et-dinteraction" class="nav-link" data-scroll-target="#diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.8</span> Diagrammes de conception et d’interaction</a></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices"><span class="header-section-number">3.1.3</span> Exercices</a></li>
+  <li><a href="#histogramme" id="toc-histogramme" class="nav-link" data-scroll-target="#histogramme"><span class="header-section-number">3.1.4</span> Histogramme</a></li>
+  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">3.1.5</span> QQ-plots</a></li>
+  <li><a href="#exercices-1" id="toc-exercices-1" class="nav-link" data-scroll-target="#exercices-1"><span class="header-section-number">3.1.6</span> Exercices</a></li>
+  <li><a href="#nuage-de-points" id="toc-nuage-de-points" class="nav-link" data-scroll-target="#nuage-de-points"><span class="header-section-number">3.1.7</span> Nuage de points</a></li>
+  <li><a href="#pairplots" id="toc-pairplots" class="nav-link" data-scroll-target="#pairplots"><span class="header-section-number">3.1.8</span> Pairplots</a></li>
+  <li><a href="#coplot" id="toc-coplot" class="nav-link" data-scroll-target="#coplot"><span class="header-section-number">3.1.9</span> Coplot</a></li>
+  <li><a href="#exercices-2" id="toc-exercices-2" class="nav-link" data-scroll-target="#exercices-2"><span class="header-section-number">3.1.10</span> Exercices</a></li>
+  <li><a href="#diagrammes-de-conception-et-dinteraction" id="toc-diagrammes-de-conception-et-dinteraction" class="nav-link" data-scroll-target="#diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.11</span> Diagrammes de conception et d’interaction</a></li>
+  <li><a href="#exercices-3" id="toc-exercices-3" class="nav-link" data-scroll-target="#exercices-3"><span class="header-section-number">3.1.12</span> Exercices</a></li>
   </ul></li>
   <li><a href="#valeurs-aberrantes-transformations-et-standardisation" id="toc-valeurs-aberrantes-transformations-et-standardisation" class="nav-link" data-scroll-target="#valeurs-aberrantes-transformations-et-standardisation"><span class="header-section-number">3.2</span> Valeurs aberrantes, transformations et standardisation</a>
   <ul class="collapse">
@@ -313,11 +317,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>La syntaxe pour générer un nuage de points avec base R est <code>dotchart(variable)</code>. L’aide est disponible avec la commande <code>?dotchart()</code>.</p>
+<p>La syntaxe pour générer un diagramme de points de Cleveland avec base R est <code>dotchart(variable)</code>. L’aide est disponible avec la commande <code>?dotchart()</code>.</p>
 </div>
 </div>
 </div>
-<p>Representons le nuage de point de Cleveland avec pour but d’identifier une possible violation de l’homogénéité ou la présence de valeurs aberrantes. Le diagrammes à points est réalisé en utilisant différents symboles conditionnels à une variable explicative nominale qui est ici l’espèce.</p>
+<p>Representons le diagramme de point de Cleveland avec pour but d’identifier une possible violation de l’homogénéité ou la présence de valeurs aberrantes. Le diagrammes à points est réalisé en utilisant différents symboles conditionnels à une variable explicative nominale qui est ici l’espèce.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dotchart</span>(penguins<span class="sc">$</span>body_mass_g, <span class="at">main=</span><span class="st">"Masse (g)"</span>, <span class="at">pch=</span><span class="fu">as.numeric</span>(penguins<span class="sc">$</span>species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -326,8 +330,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Tout point isolé à droite ou à gauche indique des valeurs aberrantes, mais dans cet jeu de données, en considérant l’ensemble du graphique aucun point n’est considéré comme aberrant, ce qui confirme notre observation de la boîte à moustache. Cependant comme observé plus haut, en prenant les points par groupe (chaque symbole représentant une espèce différente) on observe bien un groupe présentant des valeurs aberrantes.</p>
 </section>
-<section id="histogramme" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="histogramme"><span class="header-section-number">3.1.3</span> Histogramme</h3>
+<section id="exercices" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="exercices"><span class="header-section-number">3.1.3</span> Exercices</h3>
+<ol type="1">
+<li>Explorez la présence de valeurs aberrantes pour les variables <code>bill_depth_mm</code>, <code>bill_length_mm</code> et <code>flipper_length_mm</code> à l’aide de boîte à moustaches et de diagrammes en points de Cleveland.</li>
+</ol>
+</section>
+<section id="histogramme" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="histogramme"><span class="header-section-number">3.1.4</span> Histogramme</h3>
 <p>Un histogramme montre le centre et la distribution des données et donne une indication de la normalité. Toutefois, l’application d’une transformation des données pour les faire correspondre à une distribution normale nécessite des précautions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subdivision du panel graphique</span></span>
@@ -346,8 +356,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>La forme de l’histogramme montre une certaine asymétrie et l’on pourrait être tenté d’appliquer une transformation. Cependant, un histogramme conditionnel donne une image assez différente. Dans un histogramme conditionnel, les données sont divisées en fonction d’une variable nominale et les histogrammes des sous-ensembles sont tracés côte-à-côte. A ce moment on obtient une figure tout autre montrant une bimodalité aussi bien chez les males que chez les femelles manchots. On a une différence claire du centre de la distribution et la pic initial de données observé sur le premier histogramme est grandement du aux femelles. Il faudrait donc explorer les effets du sexe sur le poids des manchots ainsi que les interactions avant d’envisager une transformation des données.</p>
 </section>
-<section id="qq-plots" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="qq-plots"><span class="header-section-number">3.1.4</span> QQ-plots</h3>
+<section id="qq-plots" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="qq-plots"><span class="header-section-number">3.1.5</span> QQ-plots</h3>
 <p>Un graphique Quantile-Quantile (QQ-plots) est un outil graphique utilisé pour déterminer si les données suivent une distribution particulière. Le graphique QQ pour une distribution normale compare la distribution d’une variable donnée à la distribution gaussienne. Si les points obtenus se situent approximativement sur une ligne droite, on considère que la distribution des données est la même que celle d’une variable normalement distribuée.</p>
 <p>Le <span class="math inline">\(p\)</span>-ème quantile <span class="math inline">\(q\)</span> d’une variable aléatoire <span class="math inline">\(y\)</span> est donnée par <span class="math inline">\(F(q) = P(y \leq q) = p\)</span>. Si l’on souhaire savoir quelle valeur de <span class="math inline">\(q\)</span> appartient à <span class="math inline">\(p\)</span>, on inverse la formule précédente pour obtenir <span class="math inline">\(q = F^{-1}(p)\)</span>. Supposons que nous avons cinq observations <span class="math inline">\(Y_i\)</span> avec les valeurs 1, 2, 3, 4, 5. Par définition, le premier chiffre est le 0% percentile, le milieu est le 50% percentile et 5 est le 100% percentile. La différence entre un quantile et un percentile est un seulement le facteur 100. Les QQ-plots sont soit basés sur les percentiles ou typiquement sur les points quantiles de l’échantillon définis par <span class="math inline">\((i-0.5)/n\)</span> où <span class="math inline">\(i\)</span> varie de 1 à 5 et <span class="math inline">\(n=5\)</span> dans notre example. Ainsi pour notre exemple, les points de quantiles de l’échantillon sont 0,1, 0,3, 0,5, 0,7 et 0,9. Ce sont les valeurs de <span class="math inline">\(p\)</span> pour l’échantillon. Dans la séconde étape, ces quantiles de l’échantillon sont comparés à une distribution normale. Celà signifie que la fonction de densité <span class="math inline">\(P(y\leq q)\)</span> est désormais une fonction de densité normale et <span class="math inline">\(F()\)</span> est désormais la fonction de répartition de la loi normale.</p>
 <p>Le QQ-plot est donc un graphique des valeurs de <span class="math inline">\(Y_i\)</span> de l’échantillon comparés aux <span class="math inline">\(q_i\)</span>. On peut ajouter à ce graphique dans R, une ligne qui connecte les 25e et le 75e quartiles.</p>
@@ -378,8 +388,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="nuage-de-points" class="level3" data-number="3.1.5">
-<h3 data-number="3.1.5" class="anchored" data-anchor-id="nuage-de-points"><span class="header-section-number">3.1.5</span> Nuage de points</h3>
+<section id="exercices-1" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="exercices-1"><span class="header-section-number">3.1.6</span> Exercices</h3>
+<ol type="1">
+<li>Explorez la normalité des variables <code>bill_depth_mm</code>, <code>bill_length_mm</code> et <code>flipper_length_mm</code> à l’aide d’histogrammes et de diagramme en points de Cleveland.</li>
+</ol>
+</section>
+<section id="nuage-de-points" class="level3" data-number="3.1.7">
+<h3 data-number="3.1.7" class="anchored" data-anchor-id="nuage-de-points"><span class="header-section-number">3.1.7</span> Nuage de points</h3>
 <p>Jusqu’à présent, l’accent a été mis sur la détection des valeurs aberrantes, la vérification de la normalité et l’exploration d’ensembles de données associés à des variables explicatives nominales uniques. Les techniques suivantes s’intéressent aux relations entre plusieurs variables. Un nuage de points est un outil permettant de trouver une relation entre deux variables. Il représente une variable sur l’axe horizontal et une seconde variable sur l’axe vertical. Pour aider à visualiser la relation entre les variables, une ligne droite ou une courbe de lissage est souvent ajoutée au graphique.</p>
 <p>La figure suivante montre le nuage de points entre les variables <code>flipper_length_mm</code> (taille de la nageoire) et <code>body_mass_g</code> (masse du manchot).</p>
 <div class="cell">
@@ -391,8 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="pairplots" class="level3" data-number="3.1.6">
-<h3 data-number="3.1.6" class="anchored" data-anchor-id="pairplots"><span class="header-section-number">3.1.6</span> Pairplots</h3>
+<section id="pairplots" class="level3" data-number="3.1.8">
+<h3 data-number="3.1.8" class="anchored" data-anchor-id="pairplots"><span class="header-section-number">3.1.8</span> Pairplots</h3>
 <p>Si vous avez plus de deux variables, vous pouvez produire une série de nuage de points : un pour chaque paire de variables. Cependant, le nombre de diagrammes augmente rapidement si vous avez plus de trois variables à explorer. Une meilleure approche, jusqu’à environ 10 variables explicatives, est le diagramme de paires encore appelée matrice de nuage de points. Ces diagrammes présentent plusieurs nuage de points par paire dans un seul graphique et peuvent être utilisés pour détecter les relations entre les variables et pour détecter la colinéarité.</p>
 <p>La figure suivante montre un pairplot entre les variables <code>body_mass_g</code>, <code>flipper_length_mm</code>, <code>bill_length_mm</code> et <code>bill_depth_mm</code>. Chaque sous-graphique est un nuage de points entre deux variables, avec les etiquettes de chaque variable ajoutée dans la diagonale.</p>
 <div class="cell">
@@ -442,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Le graphique (iii) permet de déterminer si les relations entre les variables de réponse et les variables explicatives sont linéaires. Si ce n’est pas le cas, plusieurs options s’offrent à nous. La plus simple consiste à appliquer une transformation aux variables de réponse et/ou explicatives afin de linéariser les relations.</p>
 <p>D’autres options seront explorée le long du séminaire.</p>
 </section>
-<section id="coplot" class="level3" data-number="3.1.7">
-<h3 data-number="3.1.7" class="anchored" data-anchor-id="coplot"><span class="header-section-number">3.1.7</span> Coplot</h3>
+<section id="coplot" class="level3" data-number="3.1.9">
+<h3 data-number="3.1.9" class="anchored" data-anchor-id="coplot"><span class="header-section-number">3.1.9</span> Coplot</h3>
 <p>Un coplot est un nuage de points conditionnel montrant la relation entre y et x, pour différentes valeurs d’une troisième variable z, voire d’une quatrième variable w. Les variables conditionnelles peuvent être nominales ou continues.</p>
 <p>La figure suivante présente un coplot entre la masse des manchots et la taille de leur nageoire conditionée par la variable nominale espèce.</p>
 <p>Les panneaux sont classés de la partie inférieure gauche à la partie supérieure droite. Cet ordre correspond à des valeurs croissantes de la variable explicative du conditionnement.</p>
@@ -458,8 +474,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="diagrammes-de-conception-et-dinteraction" class="level3" data-number="3.1.8">
-<h3 data-number="3.1.8" class="anchored" data-anchor-id="diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.8</span> Diagrammes de conception et d’interaction</h3>
+<section id="exercices-2" class="level3" data-number="3.1.10">
+<h3 data-number="3.1.10" class="anchored" data-anchor-id="exercices-2"><span class="header-section-number">3.1.10</span> Exercices</h3>
+<ol type="1">
+<li>Explorez la présence de colinéarité entre les variables <code>body_mass_g</code> vs <code>bill_depth_mm</code> et <code>body_mass_g</code> vs <code>bill_length_mm</code> à l’aide de nauge de points et de coplot.</li>
+</ol>
+</section>
+<section id="diagrammes-de-conception-et-dinteraction" class="level3" data-number="3.1.11">
+<h3 data-number="3.1.11" class="anchored" data-anchor-id="diagrammes-de-conception-et-dinteraction"><span class="header-section-number">3.1.11</span> Diagrammes de conception et d’interaction</h3>
 <p>Les diagrammes de conception et d’interaction sont un autre outil précieux pour explorer les ensembles de données avec des variables nominales et sont particulièrement utiles à utiliser avant d’appliquer la régression, la GLM, la modélisation mixte ou l’analyse de variance.</p>
 <p>Ils permettent de visualiser (i) les différences entre les valeurs moyennes de la variable réponse pour différents niveaux de variables nominales et (ii) les interactions entre les variables explicatives.</p>
 <p>La figure suivante montre un diagramme de conception entre la masse des manchots et les trois variables nominale du jeu de données: <code>species</code>, <code>sex</code> et <code>island</code>. Il nous permet de comparer directement les moyennes (ou médianes) de chaque variable nominale en utilisant un seul graphique.</p>
@@ -507,6 +529,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="exploration_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="exercices-3" class="level3" data-number="3.1.12">
+<h3 data-number="3.1.12" class="anchored" data-anchor-id="exercices-3"><span class="header-section-number">3.1.12</span> Exercices</h3>
+<ol type="1">
+<li>Quels types d’interaction il existe entre <code>sex</code>, <code>species</code> et <code>flipper_length_mm</code> ? Explorez de même le type d’interaction entre <code>sex</code>, <code>species</code> et <code>bill_length_mm</code>.</li>
+</ol>
 </section>
 </section>
 <section id="valeurs-aberrantes-transformations-et-standardisation" class="level2" data-number="3.2">
@@ -569,7 +597,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="prochaines-étapes" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="prochaines-étapes"><span class="header-section-number">3.3.2</span> Prochaines étapes</h3>
-<p>Une fois l’exploration des données terminée, l’étape suivante consiste à vérifier et à étudier les modèles et les relations que cette étape a permis d’identifier. Si le nuage de points indique une relation linéaire entre les variables, la régression linéaire est l’étape suivante évidente. Toutefois, si le nuage de points suggère un modèle non linéaire clair, une approche différente doit être adoptée, qui peut inclure (i) l’utilisation d’interactions et/ou de termes quadratiques dans le modèle de régression linéaire, (ii) la transformation des données, (iii) la poursuite avec un modèle de régression non linéaire, (iii) l’utilisation d’une modélisation linéaire généralisée, (iv) l’application de techniques de modélisation additive généralisée, ou (v) l’application de techniques de modélisation mixtes (additives). Toutes ces approches sont étudiées dans les chapitres suivants. La première option consiste à utiliser le modèle de régression linéaire, mais il faut s’assurer que toutes les hypothèses sont respectées (par exemple, pas de modèles résiduels). Pour choisir l’approche la plus appropriée, il faut connaître les hypothèses des méthodes sélectionnées et disposer d’outils permettant de détecter les violations (à l’aide des résidus). Tous ces éléments sont abordés dans les chapitres suivants, mais tout se résume à quelque chose de très fondamental : apprenez de vos erreurs.</p>
+<p>Une fois l’exploration des données terminée, l’étape suivante consiste à vérifier et à étudier les modèles et les relations que cette étape a permis d’identifier. Si le nuage de points indique une relation linéaire entre les variables, la régression linéaire est l’étape suivante évidente. Toutefois, si le nuage de points suggère un modèle non linéaire clair, une approche différente doit être adoptée, qui peut inclure (i) l’utilisation d’interactions et/ou de termes quadratiques dans le modèle de régression linéaire, (ii) la transformation des données, (iii) la poursuite avec un modèle de régression non linéaire, (iii) l’utilisation d’une modélisation linéaire généralisée, (iv) l’application de techniques de modélisation additive généralisée, ou (v) l’application de techniques de modélisation mixtes (additives). Toutes ces approches sont étudiées dans les chapitres suivants. La première option consiste à utiliser le modèle de régression linéaire, mais il faut s’assurer que toutes les hypothèses sont respectées. Pour choisir l’approche la plus appropriée, il faut connaître les hypothèses des méthodes sélectionnées et disposer d’outils permettant de détecter les violations (à l’aide des résidus). Tous ces éléments sont abordés dans les chapitres suivants, mais tout se résume à quelque chose de très fondamental : apprenez de vos erreurs.</p>
 
 
 </section>

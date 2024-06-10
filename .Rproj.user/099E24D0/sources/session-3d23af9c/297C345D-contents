@@ -65,9 +65,11 @@ dotchart(penguins$body_mass_g, main="Masse (g)", pch=as.numeric(penguins$species
 
 Tout point isolé à droite ou à gauche indique des valeurs aberrantes, mais dans cet jeu de données, en considérant l'ensemble du graphique aucun point n'est considéré comme aberrant, ce qui confirme notre observation de la boîte à moustache. Cependant comme observé plus haut, en prenant les points par groupe (chaque symbole représentant une espèce différente) on observe bien un groupe présentant des valeurs aberrantes.
 
+
 ### Exercices
 
 1.  Explorez la présence de valeurs aberrantes pour les variables `bill_depth_mm`, `bill_length_mm` et `flipper_length_mm` à l'aide de boîte à moustaches et de diagrammes en points de Cleveland.
+
 
 ### Histogramme
 
@@ -125,9 +127,11 @@ qqnorm(bmlog, main="Logarithme (p=1)")
 qqline(bmlog)
 ```
 
+
 ### Exercices
 
 1.  Explorez la normalité des variables `bill_depth_mm`, `bill_length_mm` et `flipper_length_mm` à l'aide d'histogrammes et de diagramme en points de Cleveland.
+
 
 ### Nuage de points
 
@@ -210,9 +214,11 @@ Les panneaux sont classés de la partie inférieure gauche à la partie supérie
 coplot(body_mass_g ~ flipper_length_mm | species, data = penguins)
 ```
 
+
 ### Exercices
 
 1.  Explorez la présence de colinéarité entre les variables `body_mass_g` vs `bill_depth_mm` et `body_mass_g` vs `bill_length_mm` à l'aide de nauge de points et de coplot.
+
 
 ### Diagrammes de conception et d'interaction
 
@@ -266,6 +272,8 @@ interaction.plot(penguins$sex, penguins$island, penguins$body_mass_g)
 
 1.  Quels types d'interaction il existe entre `sex`, `species` et `flipper_length_mm` ? Explorez de même le type d'interaction entre `sex`, `species` et `bill_length_mm`.
 
+
+
 ## Valeurs aberrantes, transformations et standardisation
 
 ### Valeurs aberrantes
@@ -314,11 +322,14 @@ Cette approche est basée sur l'identification des motifs non-linéaires par l'i
 
 Par exemple, si la forme du nuage de points est similaire à la forme du quadrant en bas à gauche de la figure @fig-mosteller, alors soit if faudra effectuer une transformation $x^2$ ou $x^3$ de la variable explicative ou effectuer une transformation $log(y)$ ou $y^{0.5}$ de la variable réponse.
 
+
+
 ### Standardisation
 
 Si les variables comparées proviennent d'échelles très différentes, comme la comparaison des taux de croissance de petites espèces de poissons avec ceux de grandes espèces de poissons, la standardisation (conversion de toutes les variables à la même échelle) peut être une option. Toutefois, cela dépend de la technique statistique utilisée. Il existe plusieurs méthodes pour convertir les données à la même échelle, et une option consiste à centrer toutes les variables autour de zéro par $$ Y_i^{new} = Y_i - \bar{Y} $$ où $\bar{Y}$ est la moyenne de l'échantillon et $Y_i$ est la valeur de la i-ème observation. Cependant la standardisation la plus utilisée est donnée par $$ Y_i^{new} = (Y_i - \bar{Y}) / s_y $$ où $s_y$ est l'écart type de l'échanitllon. Les valeurs obtenues sont alors centrées autour de zéro, avec une variance de 1, et sont sans unités. Cette transformation est aussi appelée normalisation.
 
 Comme pour les autres transformations, la décision de standardiser vos données dépend de la technique statistique que vous envisagez d'utiliser. Par exemple, si vous souhaitez comparer des paramètres de régression, vous pouvez juger utile de normaliser les variables explicatives avant l'analyse, en particulier si elles sont exprimées dans des unités différentes ou si elles ont des intervalles différents. Certaines techniques, telles que l'analyse en composantes principales, normalisent ou centrent automatiquement les variables.
+
 
 ## Conclusion
 
@@ -328,4 +339,4 @@ Même si les nuages de points suggèrent l'absence de relation entre Y et X, cel
 
 ### Prochaines étapes
 
-Une fois l'exploration des données terminée, l'étape suivante consiste à vérifier et à étudier les modèles et les relations que cette étape a permis d'identifier. Si le nuage de points indique une relation linéaire entre les variables, la régression linéaire est l'étape suivante évidente. Toutefois, si le nuage de points suggère un modèle non linéaire clair, une approche différente doit être adoptée, qui peut inclure (i) l'utilisation d'interactions et/ou de termes quadratiques dans le modèle de régression linéaire, (ii) la transformation des données, (iii) la poursuite avec un modèle de régression non linéaire, (iii) l'utilisation d'une modélisation linéaire généralisée, (iv) l'application de techniques de modélisation additive généralisée, ou (v) l'application de techniques de modélisation mixtes (additives). Toutes ces approches sont étudiées dans les chapitres suivants. La première option consiste à utiliser le modèle de régression linéaire, mais il faut s'assurer que toutes les hypothèses sont respectées. Pour choisir l'approche la plus appropriée, il faut connaître les hypothèses des méthodes sélectionnées et disposer d'outils permettant de détecter les violations (à l'aide des résidus). Tous ces éléments sont abordés dans les chapitres suivants, mais tout se résume à quelque chose de très fondamental : apprenez de vos erreurs.
+Une fois l'exploration des données terminée, l'étape suivante consiste à vérifier et à étudier les modèles et les relations que cette étape a permis d'identifier. Si le nuage de points indique une relation linéaire entre les variables, la régression linéaire est l'étape suivante évidente. Toutefois, si le nuage de points suggère un modèle non linéaire clair, une approche différente doit être adoptée, qui peut inclure (i) l'utilisation d'interactions et/ou de termes quadratiques dans le modèle de régression linéaire, (ii) la transformation des données, (iii) la poursuite avec un modèle de régression non linéaire, (iii) l'utilisation d'une modélisation linéaire généralisée, (iv) l'application de techniques de modélisation additive généralisée, ou (v) l'application de techniques de modélisation mixtes (additives). Toutes ces approches sont étudiées dans les chapitres suivants. La première option consiste à utiliser le modèle de régression linéaire, mais il faut s'assurer que toutes les hypothèses sont respectées (par exemple, pas de modèles résiduels). Pour choisir l'approche la plus appropriée, il faut connaître les hypothèses des méthodes sélectionnées et disposer d'outils permettant de détecter les violations (à l'aide des résidus). Tous ces éléments sont abordés dans les chapitres suivants, mais tout se résume à quelque chose de très fondamental : apprenez de vos erreurs.
