@@ -9,7 +9,7 @@ Tous les ensembles de données ne se prêtent pas à la régression linéaire. P
 
 Les techniques telles que le GLM et le GAM sont plus difficiles à comprendre et à mettre en œuvre. C'est pourquoi nous commencerons donc par résumer brièvement les principes sous-jacents de la modélisation linéaire.
 
-Avant de taper avec enthousiasme le code R pour la régression linéaire et de l'exécuter, nous devrions d'abord réfléchir à ce que nous voulons faire. Le but de l'analyse est de trouver une relation entre les densités d'oiseaux (ABUND) et les six variables explicatives. Mais il se pourrait bien que les oiseaux perçoivent l'effet AREA différemment selon que les valeurs de GRAZE sont faibles ou élevées. Si c'est le cas, nous devons inclure un terme d'interaction entre GRAZE et L.AREA. Le problème est qu'il existe un grand nombre d'interactions bidirectionnelles potentielles. Les oiseaux peuvent réagir différemment à AREA si les valeurs de GRAZE sont faibles en combinaison avec de faibles valeurs d'altitude (ALT). Plus l'ensemble de données est petit (56 observations, c'est petit), plus il est difficile d'inclure de multiples interactions.
+Avant de taper avec enthousiasme le code R pour la régression linéaire et de l'exécuter, nous devrions d'abord réfléchir à ce que nous voulons faire. Le but de l'analyse est de trouver une relation entre les densités d'oiseaux (`abundance`) et les six variables explicatives. Mais il se pourrait bien que les oiseaux perçoivent l'effet `area` différemment selon que les valeurs de `graze` sont faibles ou élevées. Si c'est le cas, nous devons inclure un terme d'interaction entre `graze` et `larea`. Le problème est qu'il existe un grand nombre d'interactions bidirectionnelles potentielles. Les oiseaux peuvent réagir différemment à area si les valeurs de `graze` sont faibles en combinaison avec de faibles valeurs d'altitude (`altitude`). Plus l'ensemble de données est petit (56 observations, c'est petit), plus il est difficile d'inclure de multiples interactions.
 
 Il peut arriver que vous ne disposiez pas d'un nombre suffisant d'observations par combinaison. Dans ce cas, les observations individuelles peuvent devenir particulièrement influentes. De nombreux groupes de discussion statistiques ont de longs fils de discussion sur le sujet de l'interaction, voici les points que je vous recommande:
 
@@ -56,3 +56,14 @@ $$ F=\frac{(SCR_1 - SCR_2)/(p-q)}{SCR_2/(n-p)} $$
 
 Les termes $SCR_1$ et $SCR_2$ sont les sommes des carrés résiduels du modèle `model1` et du modèle $model2$ , respectivement, et $n$ est le nombre d'observations. Le nombre de paramètres dans les modèles 2 et 1 est respectivement $p$ et $q (p > q)$. 
 Les modèles sont imbriqués dans le sens où un modèle est obtenu à partir d'un autre en fixant certains paramètres à 0. L'hypothèse nulle sous-jacente à cette statistique est que les paramètres omis sont égaux à 0 : $H_0: \beta = 0$.
+Plus la valeur de la statistique $F$ est élevée, plus il y a de preuves pour rejeter cette hypothèse. En fait, la statistique $F$ suit une distribution $F$, en supposant l'homogénéité, la normalité, l'indépendance et l'absence de modèles résiduels. Dans ce cas, nous pouvons rejeter l'hypothèse nulle.
+
+Dans la régression linéaire, les $p$-values de la fonction `drop1` sont les mêmes que celles obtenues par la statistique $t$ de la commande `summary`, mais pour les GLM non gaussiens, ce n'est pas nécessairement le cas. L'hypothèse nulle sous-jacente à la statistique $F$ est que le paramètre de régression du terme qui a été abandonné est égal à 0. Fondamentalement, nous comparons un modèle complet et (à plusieurs reprises) un modèle imbriqué.
+
+Si le modèle comporte plusieurs variables nominales, la fonction `drop1` donne une $p$-value pour chaque variable, ce qui est pratique.
+
+La commande `anova` donne le résultat suivant.
+
+```{r}
+anova(model1)
+```
