@@ -97,6 +97,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -202,7 +204,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation"><span class="header-section-number">4.2</span> Modélisation</a>
+  <ul class="collapse">
+  <li><a href="#visualisation-des-résultats" id="toc-visualisation-des-résultats" class="nav-link" data-scroll-target="#visualisation-des-résultats"><span class="header-section-number">4.2.1</span> Visualisation des résultats</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -224,6 +236,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
 <p>Au chapitre précédent, nous avons utilisé divers outils graphiques (diagrammes en pointillé de Cleveland, diagrammes en boîte, histogrammes) pour explorer la forme de nos données (normalité), rechercher la présence de valeurs aberrantes et évaluer la nécessité de transformer les données.</p>
 <p>Nous avons également abordé des méthodes plus complexes (coplot, scatterplot, pairplots, boxplots, histogrammes) qui ont permis de voir les relations entre une seule variable de réponse et plus d’une variable explicative. Il s’agit de la première étape essentielle de toute analyse qui permet de se faire une idée sur les données avant de passer à des outils statistiques formels tels que la régression linéaire.</p>
 <p>Tous les ensembles de données ne se prêtent pas à la régression linéaire. Pour les données de comptage ou de présences-absences, la modélisation linéaire généralisée (GLM) est plus appropriée. Et lorsque les modèles paramétriques utilisés par la régression linéaire et la GLM donnent de mauvais résultats, les techniques non paramétriques telles que la modélisation additive et la modélisation additive généralisée (GAM) sont susceptibles de donner de meilleurs résultats.</p>
@@ -235,13 +249,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Utiliser les connaissances biologiques pour décider quelles sont les interactions qu’il est judicieux d’ajouter, le cas échéant.</li>
 <li>Appliquer une bonne exploration des données pour voir quelles interactions peuvent être importantes.</li>
 </ol>
+</section>
+<section id="modélisation" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="modélisation"><span class="header-section-number">4.2</span> Modélisation</h2>
 <p>Nous débutons l’analyse avec un modèle sans interactions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>loyn <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"Loyn.txt"</span>, <span class="at">header=</span>T)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#model1 &lt;- lm(abundance ~ area)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>loyn<span class="sc">$</span>larea <span class="ot">&lt;-</span> <span class="fu">log</span>(loyn<span class="sc">$</span>area)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>loyn<span class="sc">$</span>ldist <span class="ot">&lt;-</span> <span class="fu">log</span>(loyn<span class="sc">$</span>distance)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>loyn<span class="sc">$</span>lldist <span class="ot">&lt;-</span> <span class="fu">log</span>(loyn<span class="sc">$</span>ldistance)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>loyn<span class="sc">$</span>fgraze <span class="ot">&lt;-</span> <span class="fu">factor</span>(loyn<span class="sc">$</span>graze)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(abundance <span class="sc">~</span> larea <span class="sc">+</span> ldist <span class="sc">+</span> lldist <span class="sc">+</span> year <span class="sc">+</span> altitude <span class="sc">+</span> fgraze, <span class="at">data =</span> loyn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>La question qui se pose maintenant est la suivante : Devons-nous examiner d’abord la sortie numérique ou la sortie graphique ? Il est inutile d’appliquer une validation détaillée du modèle si rien n’est significatif. D’un autre côté, pourquoi examiner les résultats numériques si toutes les hypothèses ne sont pas respectées ? Il est peut-être préférable de commencer par les résultats numériques, car cela prend moins de temps et c’est plus facile. Il existe plusieurs façons d’obtenir le résultat numérique de notre modèle de régression linéaire.</p>
+<section id="visualisation-des-résultats" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="visualisation-des-résultats"><span class="header-section-number">4.2.1</span> Visualisation des résultats</h3>
+<p>La commande <code>summary</code> donne le résultat suivant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = abundance ~ larea + ldist + lldist + year + altitude + 
+    fgraze, data = loyn)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-15.8992  -2.7245  -0.2772   2.7052  11.2811 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  36.68025  115.16348   0.319   0.7515    
+larea         2.96755    0.65287   4.545 3.97e-05 ***
+ldist         0.14456    1.19334   0.121   0.9041    
+lldist        0.34641    0.92835   0.373   0.7107    
+year         -0.01277    0.05803  -0.220   0.8267    
+altitude      0.01070    0.02390   0.448   0.6565    
+fgraze2       0.52851    3.25221   0.163   0.8716    
+fgraze3       0.06601    2.95871   0.022   0.9823    
+fgraze4      -1.24877    3.19838  -0.390   0.6980    
+fgraze5     -12.47309    4.77827  -2.610   0.0122 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.105 on 46 degrees of freedom
+Multiple R-squared:  0.7295,    Adjusted R-squared:  0.6766 
+F-statistic: 13.78 on 9 and 46 DF,  p-value: 2.115e-10</code></pre>
+</div>
+</div>
+<p>La première partie de la sortie indique le modèle appliqué et quelques informations de base sur les résidus.</p>
+<p>La partie située sous « Coefficients » donne les paramètres de régression estimés, les erreurs standard, les <span class="math inline">\(t\)</span>-values et les <span class="math inline">\(p\)</span>-values. La seule partie déroutante de ce résultat est peut-être l’absence de graze niveau 1. Il est utilisé comme base de référence. Ainsi, une parcelle ayant le niveau 2 de graze a 0,52 oiseaux (densité) de plus qu’une parcelle ayant le niveau 1, et une parcelle ayant le niveau 5 de graze a 12,4 oiseaux de moins qu’une parcelle ayant le niveau 1. Les <span class="math inline">\(p\)</span>-values correspondantes indiquent si une parcelle est significativement différente du niveau 1. Notez que vous ne devez pas évaluer l’importance d’un facteur en fonction des <span class="math inline">\(p\)</span>-values individuelles. Nous proposerons une meilleure méthode à cet effet dans un instant. Vous ne devez pas laisser de côté les niveaux individuels d’une variable nominale. Ils sont tous pris en compte ou vous laissez tomber la variable entière. La dernière partie du code donne le <span class="math inline">\(R^2\)</span> et le <span class="math inline">\(R^2\)</span> ajusté (pour la sélection du modèle). Le reste de la sortie devrait, je l’espère, vous être familier.</p>
+<p>La fonction <code>drop1</code> fais exactement ce que son nom indique, elle elimine une variable, chacune à son tour et réevalue le modèle:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(model1, <span class="at">test=</span><span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+abundance ~ larea + ldist + lldist + year + altitude + fgraze
+         Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)    
+&lt;none&gt;                1714.4 211.60                     
+larea     1    770.01 2484.4 230.38 20.6603 3.97e-05 ***
+ldist     1      0.55 1715.0 209.62  0.0147  0.90411    
+lldist    1      5.19 1719.6 209.77  0.1392  0.71075    
+year      1      1.81 1716.2 209.66  0.0485  0.82675    
+altitude  1      7.47 1721.9 209.85  0.2004  0.65650    
+fgraze    4    413.50 2127.9 215.70  2.7736  0.03799 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Le modèle complet a une somme des carrés de 1714,43. Chaque fois, <span class="math inline">\(un\)</span> terme est supprimé à tour de rôle et la somme des carrés résiduelle est calculée à chaque fois. Celles-ci sont ensuite utilisées pour calculer une statistique <span class="math inline">\(F\)</span> et une <span class="math inline">\(p\)</span>-value correspondante. Par exemple, pour obtenir le résultat de la première ligne, R ajuste deux modèles. Le premier modèle contient toutes les variables explicatives et le second modèle toutes, sauf <span class="math inline">\(larea\)</span>. Il utilise ensuite les sommes des carrés résiduels de chaque modèle dans la statistique <span class="math inline">\(F\)</span> suivante: <span class="math display">\[ F=\frac{(SCR_1 - SCR_2)/(p-q)}{SCR_2/(n-p)} \]</span></p>
+<p>Les termes <span class="math inline">\(SCR_1\)</span> et <span class="math inline">\(SCR_2\)</span> sont les sommes des carrés résiduels du modèle <code>model1</code> et du modèle <span class="math inline">\(model2\)</span> , respectivement, et <span class="math inline">\(n\)</span> est le nombre d’observations. Le nombre de paramètres dans les modèles 2 et 1 est respectivement <span class="math inline">\(p\)</span> et <span class="math inline">\(q (p &gt; q)\)</span>. Les modèles sont imbriqués dans le sens où un modèle est obtenu à partir d’un autre en fixant certains paramètres à 0. L’hypothèse nulle sous-jacente à cette statistique est que les paramètres omis sont égaux à 0 : <span class="math inline">\(H_0: \beta = 0\)</span>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

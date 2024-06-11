@@ -1,5 +1,6 @@
 # Regression linéaire
 
+## Introduction
 Au chapitre précédent, nous avons utilisé divers outils graphiques (diagrammes en pointillé de Cleveland, diagrammes en boîte, histogrammes) pour explorer la forme de nos données (normalité), rechercher la présence de valeurs aberrantes et évaluer la nécessité de transformer les données.
 
 Nous avons également abordé des méthodes plus complexes (coplot, scatterplot, pairplots, boxplots, histogrammes) qui ont permis de voir les relations entre une seule variable de réponse et plus d'une variable explicative. Il s'agit de la première étape essentielle de toute analyse qui permet de se faire une idée sur les données avant de passer à des outils statistiques formels tels que la régression linéaire.
@@ -16,10 +17,42 @@ Il peut arriver que vous ne disposiez pas d'un nombre suffisant d'observations p
 2. Utiliser les connaissances biologiques pour décider quelles sont les interactions qu'il est judicieux d'ajouter, le cas échéant. 
 3. Appliquer une bonne exploration des données pour voir quelles interactions peuvent être importantes. 
 
+## Modélisation
+
 Nous débutons l'analyse avec un modèle sans interactions.
 
 
 ```{r}
 loyn <- read.table("Loyn.txt", header=T)
-#model1 <- lm(abundance ~ area)
+loyn$larea <- log(loyn$area)
+loyn$ldist <- log(loyn$distance)
+loyn$lldist <- log(loyn$ldistance)
+loyn$fgraze <- factor(loyn$graze)
+model1 <- lm(abundance ~ larea + ldist + lldist + year + altitude + fgraze, data = loyn)
 ```
+
+La question qui se pose maintenant est la suivante : Devons-nous examiner d'abord la sortie numérique ou la sortie graphique ? Il est inutile d'appliquer une validation détaillée du modèle si rien n'est significatif. D'un autre côté, pourquoi examiner les résultats numériques si toutes les hypothèses ne sont pas respectées ? Il est peut-être préférable de commencer par les résultats numériques, car cela prend moins de temps et c'est plus facile. Il existe plusieurs façons d'obtenir le résultat numérique de notre modèle de régression linéaire.
+
+### Visualisation des résultats
+
+La commande `summary` donne le résultat suivant:
+
+```{r}
+summary(model1)
+```
+
+La première partie de la sortie indique le modèle appliqué et quelques informations de base sur les résidus. 
+
+La partie située sous « Coefficients » donne les paramètres de régression estimés, les erreurs standard, les $t$-values et les $p$-values. La seule partie déroutante de ce résultat est peut-être l'absence de graze niveau 1. Il est utilisé comme base de référence. Ainsi, une parcelle ayant le niveau 2 de graze a 0,52 oiseaux (densité) de plus qu'une parcelle ayant le niveau 1, et une parcelle ayant le niveau 5 de graze a 12,4 oiseaux de moins qu'une parcelle ayant le niveau 1. Les $p$-values correspondantes indiquent si une parcelle est significativement différente du niveau 1. Notez que vous ne devez pas évaluer l'importance d'un facteur en fonction des $p$-values individuelles. Nous proposerons une meilleure méthode à cet effet dans un instant. Vous ne devez pas laisser de côté les niveaux individuels d'une variable nominale. Ils sont tous pris en compte ou vous laissez tomber la variable entière. La dernière partie du code donne le $R^2$ et le $R^2$ ajusté (pour la sélection du modèle). Le reste de la sortie devrait, je l'espère, vous être familier.
+
+La fonction `drop1` fais exactement ce que son nom indique, elle elimine une variable, chacune à son tour et réevalue le modèle:
+
+```{r}
+drop1(model1, test="F")
+```
+
+Le modèle complet a une somme des carrés de 1714,43. Chaque fois, $un$ terme est supprimé à tour de rôle et la somme des carrés résiduelle est calculée à chaque fois. Celles-ci sont ensuite utilisées pour calculer une statistique $F$ et une $p$-value correspondante. Par exemple, pour obtenir le résultat de la première ligne, R ajuste deux modèles. Le premier modèle contient toutes les variables explicatives et le second modèle toutes, sauf $larea$. Il utilise ensuite les sommes des carrés résiduels de chaque modèle dans la statistique $F$ suivante:
+$$ F=\frac{(SCR_1 - SCR_2)/(p-q)}{SCR_2/(n-p)} $$
+
+Les termes $SCR_1$ et $SCR_2$ sont les sommes des carrés résiduels du modèle `model1` et du modèle $model2$ , respectivement, et $n$ est le nombre d'observations. Le nombre de paramètres dans les modèles 2 et 1 est respectivement $p$ et $q (p > q)$. 
+Les modèles sont imbriqués dans le sens où un modèle est obtenu à partir d'un autre en fixant certains paramètres à 0. L'hypothèse nulle sous-jacente à cette statistique est que les paramètres omis sont égaux à 0 : $H_0: \beta = 0$.

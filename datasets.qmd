@@ -44,7 +44,7 @@ Pour rappel, la description complète du format du jeu de donnée est disponible
 
 ### A propos
 
-Les densités d'oiseaux forestiers ont été mesurées dans 56 parcelles forestières du sud-est de l'État de Victoria, en Australie. L'objectif de l'étude était de relier les densités d'oiseaux à six variables d'habitat : taille de la parcelle forestière, distance par rapport à la parcelle la plus proche, distance par rapport à la parcelle plus grande la plus proche, altitude moyenne de la parcelle, année d'isolement par défrichement et indice de l'histoire du pâturage des animaux (1 = léger, 5 = intensif). pâturage (1 = léger, 5 = intensif).
+Les densités d'oiseaux forestiers ont été mesurées dans 56 parcelles forestières du sud-est de l'État de Victoria, en Australie. L'objectif de l'étude était de relier les densités d'oiseaux à six variables d'habitat : taille de la parcelle forestière, distance par rapport à la parcelle la plus proche, distance par rapport à la parcelle plus grande la plus proche, altitude moyenne de la parcelle, année d'isolement par défrichement et indice de l'histoire du pâturage des animaux (1 = léger, 5 = intensif).
 
 ### Variables
 
@@ -53,7 +53,7 @@ Les densités d'oiseaux forestiers ont été mesurées dans 56 parcelles foresti
 | abundance | Densité d'oiseaux dans une parcelle de forêt | Variable réponse continue                                               |
 | area      | Taille de la parcelle forestière             | Variable explicative continue                                           |
 | distance  | Distance par rapport à l'îlot le plus proche | Variable explicative continue                                           |
-| ldistance | Distance par rapport à l'îlot le plus proche | Variable explicative continue                                           |
+| ldistance | Distance par rapport à l'îlot plus grand le plus proche | Variable explicative continue                                           |
 | altitude  | Altitude moyenne de la parcelle              | Variable explicative continue                                           |
 | year      | Année d'isolement                            | Variable explicative continue                                           |
 | graze     | Indice d'intensité du pâturage               | Variable nominale explicative avec 5 niveaux: 1 (faible) à 5 (intensif) |
