@@ -67,3 +67,55 @@ La commande `anova` donne le résultat suivant.
 ```{r}
 anova(model1)
 ```
+
+R utilise le carré moyen du modèle complet (37,3) et le carré moyen de chaque ligne dans un test F similaire au précédent. Ainsi, 93,13 est obtenu en divisant 3471,0 par 37,3, et 1,75 est égal à 65,5/37,3. Les carrés moyens sont calculés à partir de la somme des carrés divisée par les degrés de liberté. La somme des carrés sur la première ligne, 3471,0, est la somme des carrés de régression du modèle $abundance_i = \alpha + \beta \times larea + \epsilon_i$. Les 65,5 de la deuxième ligne représentent la diminution de la somme des carrés résiduels si $ldist$ est ajouté à ce modèle (pour le voir, ajustez un modèle avec seulement l'ordonnée à l'origine et $larea$, et un modèle avec l'ordonnée à l'origine, $larea$, et $ldist$ et comparez les deux sommes des carrés résiduels obtenus à partir des commandes anova ; la différence sera de 65,5).
+L'avantage de cette approche est que la dernière ligne nous donne une valeur p pour la variable nominale GRAZE (puisqu'il s'agit de la dernière variable ajoutée), et nous en avons besoin pour déterminer si GRAZE est significatif. L'inconvénient de cette méthode de test est que les valeurs p dépendent de l'ordre des variables : Changez l'ordre et vous obtiendrez une conclusion différente. 
+Notez que la dernière ligne de la commande anova et la ligne drop1 sont identiques. Cela s'explique par le fait que les mêmes modèles imbriqués sont comparés. 
+La fonction `anova` peut également être utilisée pour comparer des modèles imbriqués. Supposons que nous ajustions un modèle linéaire avec toutes les variables explicatives, et un modèle avec toutes les variables explicatives, à l'exception de `graze`. Ces modèles sont imbriqués car le second modèle est un cas particulier du premier, en supposant que les quatre paramètres de régression pour les niveaux de `graze` sont égaux à zéro (voir ci-dessous).
+
+```{r}
+model2 <- lm(abundance ~ larea + ldist + lldist + year + altitude, data = loyn)
+anova(model1, model2)
+```
+
+L'hypothèse nulle sous-jacente à la statistique $F$ est que les quatre paramètres de régression pour $graze$ (niveaux 2-5) sont égaux à 0, ce qui est rejeté au niveau de 5%. Notez que la $p$-value est identique à la $p$-value obtenue pour le même test avec la commande `anova(M1)`. Alors pourquoi faire la comparaison ? L'avantage de la commande `anova(M1, M2)` est que nous pouvons contrôler quels termes sont éliminés. Ceci est particulièrement utile dans le cas de termes d'interaction multiples.
+
+### Sélection de modèle
+
+Toutes les variables explicatives ne sont pas significativement différentes de 0, comme le montrent les $p$-values des statistiques $t$ (commande `summary`) ou les $p$-value de la statistique $F$ (commande `drop1`) présentées ci-dessus. Si l'objectif de l'analyse est de comprendre quelles variables explicatives déterminent l'abondance des oiseaux, nous pourrions alors décider d'abandonner les variables explicatives qui ne sont pas significatives. Il s'agit là encore d'un sujet sur lequel les statisticiens ne sont pas d'accord. Il existe essentiellement trois approches principales :
+
+1. Abandonner les variables explicatives une à une sur la base de procédures de test d'hypothèses. 
+2. Abandonner les variables explicatives une à une (et à chaque fois refaire le modèle) et utiliser un critère de sélection de modèle comme l'AIC ou le BIC pour décider du modèle optimal.
+3. Spécifier les modèles choisis a priori et comparer ces modèles entre eux.
+
+La première approche consiste à éliminer le terme le moins significatif, soit sur la base des valeurs $t$ et $p4 obtenues par la commande `summary`, soit par la commande `anova` pour comparer les modèles imbriqués s'il y a des variables nominales et/ou des interactions. Dans la deuxième approche, nous utilisons un critère de sélection comme le critère d'information d'Akaike (AIC). Il mesure la qualité de l'ajustement et la complexité du modèle. L'avantage de l'AIC est que R dispose d'outils permettant d'appliquer une sélection automatique vers l'avant ou vers l'arrière sur la base de l'AIC, ce qui facilite la vie ! L'inconvénient est que l'AIC peut être conservateur et qu'il peut être nécessaire de procéder à un réglage fin (en utilisant les résultats des tests d'hypothèse de la première approche) une fois que l'AIC a sélectionné un modèle optimal. Une sélection en arrière est appliquée par la commande `step(model1)`, et sa sortie est donnée comme suit:
+
+```{r}
+step(model1)
+```
+
+La première partie du code montre que le modèle contenant toutes les variables explicatives a un AIC de 211,6 avant l'élimination de chaque terme. Plus l'AIC est faible, meilleur est le modèle, selon l'AIC. Par conséquent, nous devrions abandonner `ldist`. La procédure se poursuit en éliminant `year`, `lldist` et `altitude`. À ce stade, aucun autre terme n'est supprimé; le modèle avec `larea` et `fgraze` a un AIC de 204,12, et la suppression de n'importe lequel de ces termes donne un AIC plus élevé. Cela signifie que le modèle optimal basé sur l'AIC contient `fgraze` et `larea`. Vous devriez réappliquer ce modèle et voir si les deux termes sont significatifs. Notez que la commande summary et la commande anova sont toutes deux nécessaires pour cela. Les deux termes sont significatifs au niveau de 5%. Vous pouvez également essayer de voir si l'ajout d'une interaction entre `larea` et `fgraze` améliore le modèle. Vous devriez pouvoir obtenir une $p$-value pour ce terme d'interaction.
+
+### Validation de modèle
+
+Une fois que le modèle optimal a été trouvé, il est temps d'appliquer une validation du modèle. Ce processus comprend (au minimum) les étapes suivantes:
+
+- Tracer les résidus (standardisés) par rapport aux valeurs ajustées pour évaluer l'homogénéité.
+- Faites un histogramme des résidus pour vérifier la normalité. Vous pouvez également utiliser un graphique QQ.
+- Tracez les résidus en fonction de chaque variable explicative utilisée dans le modèle. Si vous observez une tendance, vous ne respectez pas l'hypothèse d'indépendance.
+- Représentez les résidus par rapport à chaque variable explicative non utilisée dans le modèle. Si vous observez une tendance, incluez la variable explicative omise et réinitialisez le modèle. Si les modèles de résidus disparaissent, incluez le terme, même s'il n'est pas significatif.
+- Évaluer le modèle en fonction des observations influentes. La fonction de distance de Cook est un outil utile.
+
+Notez que la plupart des points sus-mentionnés utilisent des outils graphiques pour évaluer les hypothèses sous-jacentes d'homogénéité, de normalité et d'indépendance. Les statisticiens ont tendance à utiliser des graphiques, mais les non-statisticiens semblent préférer les tests. Il convient d'être prudent avec les tests, car certains tests utilisés pour évaluer l'homogénéité dépendent fortement de la normalité. 
+
+```{r}
+model3 <- lm(abundance ~ larea + fgraze, data = loyn)
+op <- par(mfrow = c(2,2))
+E <- rstandard(model3)
+hist(E)
+qqnorm(E)
+plot(y = E, x = loyn$larea, xlab = "area", ylab="residus")
+abline(0,0)
+plot(E ~ loyn$fgraze, xlab="graze", ylab="residus")
+abline(0,0)
+```
