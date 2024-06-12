@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Anicet Ebou">
+
+<title>Modélisation des données biologiques avec R - 5&nbsp; Modélisation additive</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glm.html" rel="next">
+<link href="./regression.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./additive.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modélisation des données biologiques avec R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Ebedthan/mbdr/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenue</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation des jeux de données</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./organigram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organigramme de relation entre les outils d’analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exploration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploration des données</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./additive.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Le nuage de points de <code>abundance</code> en fonction de <code>larea</code> est présenté ci-dessous:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(loyn<span class="sc">$</span>larea, loyn<span class="sc">$</span>abundance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="additive_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Les résidus en fonction de <code>larea</code> (voir chapitre précédent) et l’ajustement des lignes dans la suggèrent tous que l’imposition d’un effet linéaire de <code>larea</code> peut être incorrecte. D’un point de vue biologique, il est également plus logique de supposer que plus les parcelles forestières sont grandes, plus le nombre d’oiseaux est élevé, mais seulement jusqu’à un certain niveau. Un modèle additif généralisé (GAM) est une méthode qui peut être utilisée pour vérifier le type de modèle requis. Si le GAM indique que la fonction de lissage est une ligne droite, nous savons que le modèle de régression linéaire est correct.</p>
+<p>Nous utiliserons un GAM avec une distribution gaussienne et appliquerons le modèle suivant: <span class="math inline">\(abundance_i = \alpha +f_1(larea_i) + f_2(ldist_i) + f_3(lldist_i) + f_4(year_i) + f_5(altitude_i) + factor(graze_i) + \epsilon_i\)</span></p>
+<p>Par défaut, les fonctions de lissage <span class="math inline">\(f_j\)</span> sont estimées par une spline de régression à plaques minces, mais il existe diverses alternatives comme les splines de régression cubiques ; voir le fichier d’aide <code>?s</code>. Il n’est pas essentiel de connaître la différence entre tous ces lisseurs, mais cela devient un problème pour les très grands ensembles de données.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mgcv)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>amodel1 <span class="ot">&lt;-</span> <span class="fu">gam</span>(abundance <span class="sc">~</span> <span class="fu">s</span>(larea) <span class="sc">+</span> <span class="fu">s</span>(ldist) <span class="sc">+</span> <span class="fu">s</span>(lldist) <span class="sc">+</span> <span class="fu">s</span>(year) <span class="sc">+</span> <span class="fu">s</span>(altitude) <span class="sc">+</span> fgraze, <span class="at">data =</span> loyn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nous avons délibérément commencé par un modèle qui contient toutes les variables explicatives et non le sous-ensemble de variables explicatives (<code>larea</code> et <code>graze</code>) qui ont été sélectionnées dans le modèle de régression linéaire optimal. La raison en est que certaines variables peuvent avoir un effet non linéaire, ce qui peut les rendre non significatives dans un modèle de régression linéaire. Toutefois, si notre question est : «L’effet de <code>larea</code> dans le modèle de régression linéaire optimal est-il vraiment linéaire ?» par rapport à «Quel est le modèle optimal ?», nous pourrions comparer le modèle de régression linéaire optimal contenant uniquement <code>larea</code> et <code>graze</code> avec un modèle GAM qui contient uniquement une fonction de lissage de <code>larea</code> et <code>graze</code> (en tant que variable nominale).</p>
+<p>La commande <code>anova</code> n’applique pas un test F séquentiel comme elle l’a fait pour le modèle de régression linéaire. Au lieu de cela, elle donne le test de Wald (approximatif !) qui montre la signification de chaque terme dans le modèle. Son résultat est le suivant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(amodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: gaussian 
+Link function: identity 
+
+Formula:
+abundance ~ s(larea) + s(ldist) + s(lldist) + s(year) + s(altitude) + 
+    fgraze
+
+Parametric Terms:
+       df     F p-value
+fgraze  4 3.281  0.0202
+
+Approximate significance of smooth terms:
+              edf Ref.df     F  p-value
+s(larea)    3.030  3.650 8.709 7.16e-05
+s(ldist)    2.524  3.160 0.541    0.645
+s(lldist)   1.000  1.000 0.219    0.642
+s(year)     2.842  3.376 1.384    0.281
+s(altitude) 1.000  1.000 0.720    0.401</code></pre>
+</div>
+</div>
+<p>La commande <code>summary</code> donne les valeurs estimées des paramètres de régression pour chaque niveau. Notez que les différents lisseurs ne sont pas significatifs au niveau de 5%. Cela signifie que nous revenons au processus de sélection des données. Là encore, il existe plusieurs approches, voir également la section sur la régression linéaire ci-dessus. Nous pouvons soit comparer des modèles sélectionnés a priori (non abordés ici), soit utiliser des procédures de test d’hypothèse ou un outil de sélection de modèle tel que l’AIC. Dans ce cas, il existe une autre option, que nous mentionnons à la fin de cette section.</p>
+<p>L’approche par test d’hypothèse est la plus simple: il suffit d’éliminer du modèle le terme le moins significatif, de réajuster le modèle et de répéter ce processus jusqu’à ce que tous les termes soient significatifs. Il s’agit d’une approche un peu rapide et sale, mais elle est utile si le temps de calcul est long. Vous pouvez également utiliser l’AIC obtenu par la commande <code>AIC(AM1)</code>, mais dans gam il n’y a pas d’étape de fonction qui fera le travail pour vous ; vous devez supprimer chaque terme à tour de rôle, écrire l’AIC, et choisir la variable à supprimer du modèle, et répéter ce processus un certain nombre de fois. Ce processus peut prendre beaucoup de temps.</p>
+<p>Il existe une autre option. Le degré optimal de lissage est estimé à l’aide d’une méthode appelée validation croisée (Wood, 2006), où un degré de liberté produit une ligne droite et 10 degrés de liberté une courbe fortement non linéaire. Dans la régression linéaire, un terme non significatif consomme encore un degré de liberté. La fonction gam est capable de produire des lisseurs avec 0 degré de liberté, ce qui élimine la nécessité de réajuster le modèle sans les termes. Elle ne fonctionne qu’avec les splines de régression à plaques minces et les splines de régression cubiques. Le code est le suivant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>amodel2 <span class="ot">&lt;-</span> <span class="fu">gam</span>(abundance <span class="sc">~</span> <span class="fu">s</span>(larea, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> <span class="fu">s</span>(ldist, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> <span class="fu">s</span>(lldist, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> <span class="fu">s</span>(year, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> <span class="fu">s</span>(altitude, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> fgraze, <span class="at">data=</span>loyn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La nouveauté est la partie <code>bs="cs"</code>. Elle indique à R d’utiliser la spline de régression cubique avec rétrécissement. Encore une fois, il n’est pas très important pour vous de comprendre les différences entre ces différents types de lisseurs. Dans la pratique, ils se ressemblent. Les lisseurs de plaques minces ont tendance à être légèrement plus linéaires.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(amodel2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Family: gaussian 
+Link function: identity 
+
+Formula:
+abundance ~ s(larea, bs = "cs") + s(ldist, bs = "cs") + s(lldist, 
+    bs = "cs") + s(year, bs = "cs") + s(altitude, bs = "cs") + 
+    fgraze
+
+Parametric Terms:
+       df     F p-value
+fgraze  4 4.091 0.00675
+
+Approximate significance of smooth terms:
+                  edf    Ref.df     F  p-value
+s(larea)    2.369e+00 9.000e+00 4.033 1.41e-06
+s(ldist)    2.993e+00 9.000e+00 0.432    0.270
+s(lldist)   1.759e-07 9.000e+00 0.000    0.762
+s(year)     2.668e+00 9.000e+00 0.450    0.199
+s(altitude) 9.151e-08 9.000e+00 0.000    0.594</code></pre>
+</div>
+</div>
+<p>Notez que les lisseurs pour <code>lldist</code> et <code>altitude</code> ont 0 degré de liberté. Cependant, il y a encore du travail à faire car les lisseurs de <code>ldist</code> et <code>year</code> ne sont pas significatifs au niveau de 5%. Si l’on supprime ces deux variables (une à une), on constate que le modèle optimal ne contient plus qu’un effet <code>larea</code> et un effet <code>graze</code>.</p>
+<p>Le lisseur pour <code>larea</code> de ce modèle est présenté dans la figure suivante:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>amodel3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(abundance <span class="sc">~</span> <span class="fu">s</span>(larea, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> fgraze, <span class="at">data=</span>loyn)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(amodel3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="additive_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Le processus de validation du modèle devrait suivre pratiquement les mêmes étapes que pour la régression linéaire. Les seules différences sont que les résidus sont obtenus par la commande <code>resid (amodel3)</code> et qu’il n’y a pas de fonction qui trace les résidus par rapport aux valeurs ajustées. Vous devez le faire manuellement en utilisant le code suivant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>e.am3 <span class="ot">&lt;-</span> <span class="fu">resid</span>(amodel3)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fit.am3 <span class="ot">&lt;-</span> <span class="fu">fitted</span>(amodel3)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>fit.am3, <span class="at">y=</span>e.am3, <span class="at">xlab=</span><span class="st">"Valeurs ajustées"</span>, <span class="at">ylab=</span><span class="st">"Residus"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="additive_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Là encore, il est important de tracer les résidus en fonction de chaque variable explicative! Si l’un de ces graphiques montre un schema, vous devez trouver une solution. La dernière question que nous devons nous poser est de savoir si le GAM était nécessaire. Nous nous sommes retrouvés avec le même ensemble de variables explicatives, et l’on peut imaginer une ligne droite à l’intérieur des intervalles de confiance à 95 % de la figure précédente. Les degrés de liberté estimés à 2,79 indiquent également un effet <code>larea</code> presque linéaire. En fait, nous pouvons tester si le GAM est meilleur que le modèle de régression linéaire car les deux modèles contiennent le même ensemble de variables explicatives.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(abundance <span class="sc">~</span> larea <span class="sc">+</span> fgraze, <span class="at">data=</span>loyn)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>amodel3 <span class="ot">&lt;-</span> <span class="fu">gam</span>(abundance <span class="sc">~</span> <span class="fu">s</span>(larea, <span class="at">bs=</span><span class="st">"cs"</span>) <span class="sc">+</span> fgraze, <span class="at">data=</span>loyn)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model3, amodel3, <span class="at">test=</span><span class="st">"F"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: abundance ~ larea + fgraze
+Model 2: abundance ~ s(larea, bs = "cs") + fgraze
+  Res.Df    RSS     Df Sum of Sq      F  Pr(&gt;F)  
+1 50.000 1730.4                                  
+2 48.058 1520.0 1.9415    210.37 3.4258 0.04196 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>L’hypothèse nulle sous-jacente est que les deux modèles sont identiques ou, plus mathématiquement, que le lisseur est une ligne droite (1 df). Dans ce cas, nous pouvons rejeter cette hypothèse nulle car le modèle le plus compliqué est le GAM; il est significativement meilleur au seuil de 5%, même s’il a une <span class="math inline">\(p\)</span>-value peu convaincante de 0,04. Mais nous préférons également le GAM car il ne présente pas de modèles résiduels. Cependant, l’effet non linéaire de <code>larea</code> est principalement dû à deux grands patchs. Il serait utile d’échantillonner davantage de parcelles de ce type à l’avenir.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./regression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glm.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Modélisation des données biologiques avec R écris par Anicet Ebou</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

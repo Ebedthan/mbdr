@@ -26,6 +26,7 @@ book:
     - organigram.qmd
     - exploration.qmd
     - regression.qmd
+    - additive.qmd
     - glm.qmd
     - gam.qmd
     - references.qmd

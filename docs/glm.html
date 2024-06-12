@@ -8,7 +8,7 @@
 
 <meta name="author" content="Anicet Ebou">
 
-<title>Modélisation des données biologiques avec R - 5&nbsp; Modèles linéaires généralisés</title>
+<title>Modélisation des données biologiques avec R - 6&nbsp; Modèles linéaires généralisés</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./gam.html" rel="next">
-<link href="./regression.html" rel="prev">
+<link href="./additive.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -146,14 +146,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./additive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./glm.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -172,8 +178,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#glm-poisson" id="toc-glm-poisson" class="nav-link active" data-scroll-target="#glm-poisson"><span class="header-section-number">5.1</span> GLM Poisson</a></li>
-  <li><a href="#glm-logistique" id="toc-glm-logistique" class="nav-link" data-scroll-target="#glm-logistique"><span class="header-section-number">5.2</span> GLM logistique</a></li>
+  <li><a href="#glm-poisson" id="toc-glm-poisson" class="nav-link active" data-scroll-target="#glm-poisson"><span class="header-section-number">6.1</span> GLM Poisson</a></li>
+  <li><a href="#glm-logistique" id="toc-glm-logistique" class="nav-link" data-scroll-target="#glm-logistique"><span class="header-section-number">6.2</span> GLM logistique</a></li>
   </ul>
 </nav>
     </div>
@@ -182,7 +188,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></h1>
 </div>
 
 
@@ -197,11 +203,11 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="glm-poisson" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="glm-poisson"><span class="header-section-number">5.1</span> GLM Poisson</h2>
+<section id="glm-poisson" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="glm-poisson"><span class="header-section-number">6.1</span> GLM Poisson</h2>
 </section>
-<section id="glm-logistique" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="glm-logistique"><span class="header-section-number">5.2</span> GLM logistique</h2>
+<section id="glm-logistique" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="glm-logistique"><span class="header-section-number">6.2</span> GLM logistique</h2>
 
 
 </section>
@@ -442,13 +448,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./regression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression linéaire</span></span>
+      <a href="./additive.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./gam.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
