@@ -8,7 +8,7 @@
 
 <meta name="author" content="Anicet Ebou">
 
-<title>Modélisation des données biologiques avec R - 7&nbsp; Modèles linéaires généralisés</title>
+<title>Modélisation des données biologiques avec R - 6&nbsp; La famille des lois exponentielles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./gam.html" rel="next">
-<link href="./exponential.html" rel="prev">
+<link href="./glm.html" rel="next">
+<link href="./additive.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,6 +63,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -75,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exponential.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,13 +154,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exponential.html" class="sidebar-item-text sidebar-link">
+  <a href="./exponential.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glm.html" class="sidebar-item-text sidebar-link active">
+  <a href="./glm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
   </div>
 </li>
@@ -184,8 +186,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#glm-poisson" id="toc-glm-poisson" class="nav-link active" data-scroll-target="#glm-poisson"><span class="header-section-number">7.1</span> GLM Poisson</a></li>
-  <li><a href="#glm-logistique" id="toc-glm-logistique" class="nav-link" data-scroll-target="#glm-logistique"><span class="header-section-number">7.2</span> GLM logistique</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">6.1</span> Introduction</a></li>
+  <li><a href="#la-loi-normale" id="toc-la-loi-normale" class="nav-link" data-scroll-target="#la-loi-normale"><span class="header-section-number">6.2</span> La loi normale</a></li>
+  <li><a href="#la-loi-de-poisson" id="toc-la-loi-de-poisson" class="nav-link" data-scroll-target="#la-loi-de-poisson"><span class="header-section-number">6.3</span> La loi de Poisson</a></li>
+  <li><a href="#la-loi-binomial-négative" id="toc-la-loi-binomial-négative" class="nav-link" data-scroll-target="#la-loi-binomial-négative"><span class="header-section-number">6.4</span> La loi binomial négative</a></li>
+  <li><a href="#la-loi-de-bernoulli-et-la-loi-binomiale" id="toc-la-loi-de-bernoulli-et-la-loi-binomiale" class="nav-link" data-scroll-target="#la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.5</span> La loi de Bernoulli et la loi binomiale</a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></h1>
 </div>
 
 
@@ -209,11 +214,35 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="glm-poisson" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="glm-poisson"><span class="header-section-number">7.1</span> GLM Poisson</h2>
+<section id="introduction" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<p>Dans les chapitres précédents, la régression linéaire et la modélisation additive ont été abordées. Dans les chapitres suivants traitent des techniques de modélisation linéaire généralisée (GLM) et de modélisation additive généralisée (GAM). Dans la régression linéaire et la modélisation additive, nous utilisons la distribution normale (ou gaussienne). Il est important de comprendre que cette distribution s’applique à la variable réponse. La GLM et la GAM sont des extensions de la modélisation linéaire et additive en ce sens qu’une distribution non gaussienne est utilisée pour la variable réponse et que la relation (ou le lien) entre la variable réponse et les variables explicatives peut être différente. Dans ce chapitre, nous nous concentrons sur le premier point, la distribution.</p>
+<p>De nombreuses raisons justifient l’utilisation de la GLM et de la GAM au lieu de la régression linéaire et de la modélisation additive. Les données d’absence-présence sont (généralement) codées comme 1 et 0, les données proportionnelles sont toujours comprises entre 0 et 100 % et les données de comptage sont toujours non négatives. Les modèles GLM et GAM utilisés pour les données 0-1 et proportionnelles sont généralement basés sur les distributions de Bernoulli et binomiale et, pour les données de comptage, les distributions de Poisson et binomiale négative sont des options courantes. Pour les données continues, la distribution gaussienne est la plus utilisée, mais vous pouvez également utiliser la distribution gamma. Ainsi, avant d’utiliser les GLM et les GAM, nous devons nous concentrer sur les questions suivantes: Que sont ces distributions, à quoi ressemblent-elles et quand les utiliser ? Ces trois questions constituent la base de ce chapitre. Nous consacrons un chapitre entier à ce sujet car, d’après notre expérience, peu de nos étudiants sont familiarisés avec les distributions de Poisson, binomiale négative ou gamma, et un certain niveau de familiarité est nécessaire avant d’entrer dans le monde des GLM et des GAM dans le chapitre suivant.</p>
+<p>Comme nous le verrons dans le chapitre suivant, un GLM (ou GAM) se compose de trois étapes : (i) le choix d’une distribution pour la variable réponse, (ii) la définition de la partie systématique en termes de covariables, et (iii) la spécification de la relation (ou : lien) entre la valeur attendue de la variable réponse et la partie systématique. Cela signifie que nous devons nous arrêter un instant et réfléchir à la nature de la variable réponse.</p>
 </section>
-<section id="glm-logistique" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="glm-logistique"><span class="header-section-number">7.2</span> GLM logistique</h2>
+<section id="la-loi-normale" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="la-loi-normale"><span class="header-section-number">6.2</span> La loi normale</h2>
+</section>
+<section id="la-loi-de-poisson" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="la-loi-de-poisson"><span class="header-section-number">6.3</span> La loi de Poisson</h2>
+<p>La loi de Poisson (Poisson, 1837) est une loi de probabilité discrète qui décrit le comportement du nombre d’événements se produisant dans un intervalle de temps fixé, si ces événements se produisent avec une fréquence moyenne ou espérance connue, et indépendamment du temps écoulé depuis l’événement précédent.</p>
+<p>Soit <span class="math inline">\(\lambda &gt; 0\)</span>, on dit qu’une variable aléatoire <span class="math inline">\(X\)</span> suit la loi de Poisson de paramètre <span class="math inline">\(\lambda\)</span>, ce que l’on note <span class="math inline">\(X \hookrightarrow \mathcal{P}(\lambda)\)</span> si <span class="math inline">\(X(\Omega) = \mathbb{N}\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="exponential_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="la-loi-binomial-négative" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="la-loi-binomial-négative"><span class="header-section-number">6.4</span> La loi binomial négative</h2>
+</section>
+<section id="la-loi-de-bernoulli-et-la-loi-binomiale" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.5</span> La loi de Bernoulli et la loi binomiale</h2>
+<p>Les deux dernières distributions que nous examinons sont la distribution de Bernoulli et la distribution binomiale, et nous commençons par cette dernière. Dans un cours de statistique de première année, elle est souvent présentée comme la distribution utilisée pour étudier le lancer d’une pièce de monnaie. Supposons que vous sachiez qu’une pièce est équilibrée (personne ne l’a manipulée et la probabilité d’obtenir un face est la même que celle d’obtenir la pile), et que vous la lanciez 20 fois. La question est de savoir combien de faces vous attendez? Les valeurs possibles sont comprises entre 0 et 20. Évidemment, la valeur la plus probable est 10 faces. En utilisant la distribution binomiale, nous pouvons dire quelle est la probabilité que vous obteniez 0, 1, 2, . . ., 19 ou 20 faces.</p>
+<p>Une distribution binomiale est définie comme suit. Nous disposons de N essais indépendants et identiques, chacun ayant une probabilité <span class="math inline">\(P(Y_i = 1) = \pi\)</span> de succès et une probabilité <span class="math inline">\(P(Y_i = 0) = 1 - \pi\)</span> d’échec. Les étiquettes «succès» et «échec» sont utilisées pour les résultats 1 et 0 de l’expérience. Le terme «succès» peut être assimilé à <span class="math inline">\(P(Y_i = face)\)</span> et le terme «échec» à <span class="math inline">\(P(Y_i = pile)\)</span>. Le terme «indépendant» signifie que tous les lancers ne sont pas liés. Le terme identique signifie que chaque lancer a la même probabilité de réussite. Sous ces hypothèses, la fonction de densité est donnée par <span class="math display">\[f(y; \pi) = \binom{N}{y} \times \pi^y \times (1 - \pi)^{N-y}\]</span></p>
+<p>La probabilité pour chaque valeur de <span class="math inline">\(y\)</span> entre 0 et 20 pour l’exemple du lancer peut être calculée avec cette fonction de probabilité. Par exemple, si <span class="math inline">\(N = 20\)</span> et <span class="math inline">\(π = 0,5\)</span>, la probabilité de mesurer 9 faces est de <span class="math inline">\((20!/(9! × 11!)) × 0.5^9 × (1 - 0.5)^{11}\)</span>. Comme prévu, la valeur <span class="math inline">\(y = 10\)</span> a la probabilité la plus élevée, mais 9 et 11 ont des probabilités très similaires.</p>
+<p>L’espérance et la variance de distribution binomiale est donnée par: <span class="math display">\[E(Y) = N \times \pi\]</span> et <span class="math display">\[var(Y) = N \times \pi \times (1 - \pi)\]</span></p>
+<p>En biologie, on pourrait prendre l’exemple d’un un élevage de poulets et prélevons des échantillons de <span class="math inline">\(N\)</span> animaux pour détecter la présence ou l’absence d’une maladie particulière. Dans ce type de recherche, on veut connaître la probabilité <span class="math inline">\(π\)</span> qu’un animal donné soit infecté par la maladie.</p>
 
 
 </section>
@@ -454,13 +483,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./exponential.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></span>
+      <a href="./additive.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modélisation additive</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./gam.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./glm.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

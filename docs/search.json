@@ -100,16 +100,16 @@
   {
     "objectID": "glm.html#glm-poisson",
     "href": "glm.html#glm-poisson",
-    "title": "6  Modèles linéaires généralisés",
-    "section": "6.1 GLM Poisson",
-    "text": "6.1 GLM Poisson"
+    "title": "7  Modèles linéaires généralisés",
+    "section": "7.1 GLM Poisson",
+    "text": "7.1 GLM Poisson"
   },
   {
     "objectID": "glm.html#glm-logistique",
     "href": "glm.html#glm-logistique",
-    "title": "6  Modèles linéaires généralisés",
-    "section": "6.2 GLM logistique",
-    "text": "6.2 GLM logistique"
+    "title": "7  Modèles linéaires généralisés",
+    "section": "7.2 GLM logistique",
+    "text": "7.2 GLM logistique"
   },
   {
     "objectID": "references.html",
@@ -117,5 +117,40 @@
     "title": "References",
     "section": "",
     "text": "Zuur, Alain F, Elena N Ieno, Graham M Smith, et al. 2007. Analysing\nEcological Data. Vol. 680. Springer."
+  },
+  {
+    "objectID": "exponential.html#introduction",
+    "href": "exponential.html#introduction",
+    "title": "6  La famille des lois exponentielles",
+    "section": "6.1 Introduction",
+    "text": "6.1 Introduction\nDans les chapitres précédents, la régression linéaire et la modélisation additive ont été abordées. Dans les chapitres suivants traitent des techniques de modélisation linéaire généralisée (GLM) et de modélisation additive généralisée (GAM). Dans la régression linéaire et la modélisation additive, nous utilisons la distribution normale (ou gaussienne). Il est important de comprendre que cette distribution s’applique à la variable réponse. La GLM et la GAM sont des extensions de la modélisation linéaire et additive en ce sens qu’une distribution non gaussienne est utilisée pour la variable réponse et que la relation (ou le lien) entre la variable réponse et les variables explicatives peut être différente. Dans ce chapitre, nous nous concentrons sur le premier point, la distribution.\nDe nombreuses raisons justifient l’utilisation de la GLM et de la GAM au lieu de la régression linéaire et de la modélisation additive. Les données d’absence-présence sont (généralement) codées comme 1 et 0, les données proportionnelles sont toujours comprises entre 0 et 100 % et les données de comptage sont toujours non négatives. Les modèles GLM et GAM utilisés pour les données 0-1 et proportionnelles sont généralement basés sur les distributions de Bernoulli et binomiale et, pour les données de comptage, les distributions de Poisson et binomiale négative sont des options courantes. Pour les données continues, la distribution gaussienne est la plus utilisée, mais vous pouvez également utiliser la distribution gamma. Ainsi, avant d’utiliser les GLM et les GAM, nous devons nous concentrer sur les questions suivantes: Que sont ces distributions, à quoi ressemblent-elles et quand les utiliser ? Ces trois questions constituent la base de ce chapitre. Nous consacrons un chapitre entier à ce sujet car, d’après notre expérience, peu de nos étudiants sont familiarisés avec les distributions de Poisson, binomiale négative ou gamma, et un certain niveau de familiarité est nécessaire avant d’entrer dans le monde des GLM et des GAM dans le chapitre suivant.\nComme nous le verrons dans le chapitre suivant, un GLM (ou GAM) se compose de trois étapes : (i) le choix d’une distribution pour la variable réponse, (ii) la définition de la partie systématique en termes de covariables, et (iii) la spécification de la relation (ou : lien) entre la valeur attendue de la variable réponse et la partie systématique. Cela signifie que nous devons nous arrêter un instant et réfléchir à la nature de la variable réponse."
+  },
+  {
+    "objectID": "exponential.html#la-loi-normale",
+    "href": "exponential.html#la-loi-normale",
+    "title": "6  La famille des lois exponentielles",
+    "section": "6.2 La loi normale",
+    "text": "6.2 La loi normale"
+  },
+  {
+    "objectID": "exponential.html#la-loi-de-poisson",
+    "href": "exponential.html#la-loi-de-poisson",
+    "title": "6  La famille des lois exponentielles",
+    "section": "6.3 La loi de Poisson",
+    "text": "6.3 La loi de Poisson\nLa loi de Poisson (Poisson, 1837) est une loi de probabilité discrète qui décrit le comportement du nombre d’événements se produisant dans un intervalle de temps fixé, si ces événements se produisent avec une fréquence moyenne ou espérance connue, et indépendamment du temps écoulé depuis l’événement précédent.\nSoit \\(\\lambda &gt; 0\\), on dit qu’une variable aléatoire \\(X\\) suit la loi de Poisson de paramètre \\(\\lambda\\), ce que l’on note \\(X \\hookrightarrow \\mathcal{P}(\\lambda)\\) si \\(X(\\Omega) = \\mathbb{N}\\)"
+  },
+  {
+    "objectID": "exponential.html#la-loi-binomial-négative",
+    "href": "exponential.html#la-loi-binomial-négative",
+    "title": "6  La famille des lois exponentielles",
+    "section": "6.4 La loi binomial négative",
+    "text": "6.4 La loi binomial négative"
+  },
+  {
+    "objectID": "exponential.html#la-loi-de-bernoulli-et-la-loi-binomiale",
+    "href": "exponential.html#la-loi-de-bernoulli-et-la-loi-binomiale",
+    "title": "6  La famille des lois exponentielles",
+    "section": "6.5 La loi de Bernoulli et la loi binomiale",
+    "text": "6.5 La loi de Bernoulli et la loi binomiale\nLes deux dernières distributions que nous examinons sont la distribution de Bernoulli et la distribution binomiale, et nous commençons par cette dernière. Dans un cours de statistique de première année, elle est souvent présentée comme la distribution utilisée pour étudier le lancer d’une pièce de monnaie. Supposons que vous sachiez qu’une pièce est équilibrée (personne ne l’a manipulée et la probabilité d’obtenir un face est la même que celle d’obtenir la pile), et que vous la lanciez 20 fois. La question est de savoir combien de faces vous attendez? Les valeurs possibles sont comprises entre 0 et 20. Évidemment, la valeur la plus probable est 10 faces. En utilisant la distribution binomiale, nous pouvons dire quelle est la probabilité que vous obteniez 0, 1, 2, . . ., 19 ou 20 faces.\nUne distribution binomiale est définie comme suit. Nous disposons de N essais indépendants et identiques, chacun ayant une probabilité \\(P(Y_i = 1) = \\pi\\) de succès et une probabilité \\(P(Y_i = 0) = 1 - \\pi\\) d’échec. Les étiquettes «succès» et «échec» sont utilisées pour les résultats 1 et 0 de l’expérience. Le terme «succès» peut être assimilé à \\(P(Y_i = face)\\) et le terme «échec» à \\(P(Y_i = pile)\\). Le terme «indépendant» signifie que tous les lancers ne sont pas liés. Le terme identique signifie que chaque lancer a la même probabilité de réussite. Sous ces hypothèses, la fonction de densité est donnée par \\[f(y; \\pi) = \\binom{N}{y} \\times \\pi^y \\times (1 - \\pi)^{N-y}\\]\nLa probabilité pour chaque valeur de \\(y\\) entre 0 et 20 pour l’exemple du lancer peut être calculée avec cette fonction de probabilité. Par exemple, si \\(N = 20\\) et \\(π = 0,5\\), la probabilité de mesurer 9 faces est de \\((20!/(9! × 11!)) × 0.5^9 × (1 - 0.5)^{11}\\). Comme prévu, la valeur \\(y = 10\\) a la probabilité la plus élevée, mais 9 et 11 ont des probabilités très similaires.\nL’espérance et la variance de distribution binomiale est donnée par: \\[E(Y) = N \\times \\pi\\] et \\[var(Y) = N \\times \\pi \\times (1 - \\pi)\\]\nEn biologie, on pourrait prendre l’exemple d’un un élevage de poulets et prélevons des échantillons de \\(N\\) animaux pour détecter la présence ou l’absence d’une maladie particulière. Dans ce type de recherche, on veut connaître la probabilité \\(π\\) qu’un animal donné soit infecté par la maladie."
   }
 ]

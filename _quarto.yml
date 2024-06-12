@@ -27,6 +27,7 @@ book:
     - exploration.qmd
     - regression.qmd
     - additive.qmd
+    - exponential.qmd
     - glm.qmd
     - gam.qmd
     - references.qmd
