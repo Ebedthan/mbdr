@@ -48,20 +48,51 @@ Les densités d'oiseaux forestiers ont été mesurées dans 56 parcelles foresti
 
 ### Variables
 
-| Variable  | Description                                  | Type                                                                    |
-|-----------|----------------------------------------------|-------------------------------------------------------------------------|
-| abundance | Densité d'oiseaux dans une parcelle de forêt | Variable réponse continue                                               |
-| area      | Taille de la parcelle forestière             | Variable explicative continue                                           |
-| distance  | Distance par rapport à l'îlot le plus proche | Variable explicative continue                                           |
+| Variable  | Description                                             | Type                                                                    |
+|-----------------|---------------------|----------------------------------|
+| abundance | Densité d'oiseaux dans une parcelle de forêt            | Variable réponse continue                                               |
+| area      | Taille de la parcelle forestière                        | Variable explicative continue                                           |
+| distance  | Distance par rapport à l'îlot le plus proche            | Variable explicative continue                                           |
 | ldistance | Distance par rapport à l'îlot plus grand le plus proche | Variable explicative continue                                           |
-| altitude  | Altitude moyenne de la parcelle              | Variable explicative continue                                           |
-| year      | Année d'isolement                            | Variable explicative continue                                           |
-| graze     | Indice d'intensité du pâturage               | Variable nominale explicative avec 5 niveaux: 1 (faible) à 5 (intensif) |
-|           |                                              |                                                                         |
-
+| altitude  | Altitude moyenne de la parcelle                         | Variable explicative continue                                           |
+| year      | Année d'isolement                                       | Variable explicative continue                                           |
+| graze     | Indice d'intensité du pâturage                          | Variable nominale explicative avec 5 niveaux: 1 (faible) à 5 (intensif) |
+|           |                                                         |                                                                         |
 
 ### Importer les données
 
 ```{r}
 loyn <- read.table("Loyn.txt", header=TRUE)
 ```
+
+## Le jeu de données `roadkills`
+
+### A propos
+
+Le cycle de vie de la plupart des amphibiens comporte une phase aquatique, correspondant à la reproduction, au développement des têtards et à la métamorphose, et une phase terrestre, au cours de laquelle les individus utilisent un territoire adjacent pour se nourrir, s'abriter, passer des périodes de dormance ou d'hivernage (Semlitsch et Bodie, 2003). Des niveaux élevés de mortalité routière se produisent lorsque les routes traversent les voies de migration des amphibiens vers et depuis les sites de ponte ou pendant la dispersion des juvéniles (Langton, 2002).
+
+Ces données proviennent d'une étude de deux ans sur la mortalité routière des vertébrés sur une route nationale du sud du Portugal (IP2, tronçon Portalegre- Monforte, 27 km de long). La route étudiée a des accotements pavés, deux voies et un trafic modéré (moins de 10 000 véhicules par jour). Les abords de la route sont dominés par des peuplements de chênes-lièges Quercus suber et de chênes verts Q. rotundifolia, appelés "montado", et par des terres ouvertes, notamment des pâturages, des prairies et des jachères.
+
+La route a été inspectée toutes les deux semaines entre mars 1995 et mars 1997. Les relevés ont été effectués par une voiture roulant lentement (10-20 km par heure) le long de la route sur la bande d'arrêt d'urgence. Chaque animal trouvé mort a été identifié au niveau de l'espèce, dans la mesure du possible, et sa localisation géographique, en coordonnées UTM, a été déterminée à l'aide d'une cartographie détaillée (1:2000) des profils routiers horizontaux et verticaux et de photographies aériennes. Toutes les carcasses ont été retirées de la route afin d'éviter un double comptage.
+
+Pour les besoins de l'analyse des données, la route a été divisée en segments de 500 mètres. La variable réponse est le nombre total de décès d'amphibiens par segment. Tous les animaux trouvés morts sur chaque segment ont été attribués aux coordonnées de son point central.
+
+| Variable                               | Abbreviation |
+|----------------------------------------|--------------|
+| Terres ouvertes (ha)                   | OPEN.L       |
+| Sillon d'olives (ha)                   | OLIVE        |
+| Montado avec des arbustres (ha)        | MONT.S       |
+| Montado sans arbustres (ha)            | MONT         |
+| Policulture (ha)                       | POLIC        |
+| Arbustres (ha)                         | SHRUB        |
+| Urbain (ha)                            | URBAN        |
+| Reservoirs d'eau                       | WAT.RES      |
+| Longueur des cours d'eaux (km)         | L.WAT.C      |
+| Longueur de routes mal entretenues (m) | L.D.ROAD     |
+| Longueur des routes entretenues        | L.P.ROAD     |
+| Distance des reservoirs d'eau          | D.WAT.RES    |
+| Distance des cours d'eaux              | D.WAT.COUR   |
+| Distance du parc naturel               | D.PARK       |
+| Nombre de parcelles habitées           | N.PATCH      |
+| Limites du perimetre                   | P.EDGE       |
+| Indice de Shannon du paysage           | L.SDI        |
