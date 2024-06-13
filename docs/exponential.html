@@ -190,7 +190,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#la-loi-normale" id="toc-la-loi-normale" class="nav-link" data-scroll-target="#la-loi-normale"><span class="header-section-number">6.2</span> La loi normale</a></li>
   <li><a href="#la-loi-de-poisson" id="toc-la-loi-de-poisson" class="nav-link" data-scroll-target="#la-loi-de-poisson"><span class="header-section-number">6.3</span> La loi de Poisson</a></li>
   <li><a href="#la-loi-binomial-négative" id="toc-la-loi-binomial-négative" class="nav-link" data-scroll-target="#la-loi-binomial-négative"><span class="header-section-number">6.4</span> La loi binomial négative</a></li>
-  <li><a href="#la-loi-de-bernoulli-et-la-loi-binomiale" id="toc-la-loi-de-bernoulli-et-la-loi-binomiale" class="nav-link" data-scroll-target="#la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.5</span> La loi de Bernoulli et la loi binomiale</a></li>
+  <li><a href="#la-loi-gamma" id="toc-la-loi-gamma" class="nav-link" data-scroll-target="#la-loi-gamma"><span class="header-section-number">6.5</span> La loi Gamma</a></li>
+  <li><a href="#la-loi-de-bernoulli-et-la-loi-binomiale" id="toc-la-loi-de-bernoulli-et-la-loi-binomiale" class="nav-link" data-scroll-target="#la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.6</span> La loi de Bernoulli et la loi binomiale</a></li>
+  <li><a href="#quelle-distribution-choisir" id="toc-quelle-distribution-choisir" class="nav-link" data-scroll-target="#quelle-distribution-choisir"><span class="header-section-number">6.7</span> Quelle distribution choisir?</a></li>
   </ul>
 </nav>
     </div>
@@ -226,23 +228,97 @@ ul.task-list li input[type="checkbox"] {
 <section id="la-loi-de-poisson" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="la-loi-de-poisson"><span class="header-section-number">6.3</span> La loi de Poisson</h2>
 <p>La loi de Poisson (Poisson, 1837) est une loi de probabilité discrète qui décrit le comportement du nombre d’événements se produisant dans un intervalle de temps fixé, si ces événements se produisent avec une fréquence moyenne ou espérance connue, et indépendamment du temps écoulé depuis l’événement précédent.</p>
-<p>Soit <span class="math inline">\(\lambda &gt; 0\)</span>, on dit qu’une variable aléatoire <span class="math inline">\(X\)</span> suit la loi de Poisson de paramètre <span class="math inline">\(\lambda\)</span>, ce que l’on note <span class="math inline">\(X \hookrightarrow \mathcal{P}(\lambda)\)</span> si <span class="math inline">\(X(\Omega) = \mathbb{N}\)</span></p>
+<p>Soit <span class="math inline">\(\lambda &gt; 0\)</span>, on dit qu’une variable aléatoire <span class="math inline">\(X\)</span> suit la loi de Poisson de paramètre <span class="math inline">\(\lambda\)</span>, ce que l’on note <span class="math inline">\(X \hookrightarrow \mathcal{P}(\lambda)\)</span> si <span class="math inline">\(X(\Omega) = \mathbb{N}\)</span>, pour tout <span class="math inline">\(k \geq 0, P(X = k) = e^{-\lambda}\frac{\lambda^k}{k!}\)</span>.</p>
+<p>Cette formule spécifie la probabilité de <span class="math inline">\(k\)</span> avec une moyenne <span class="math inline">\(\lambda\)</span>. Notez que <span class="math inline">\(k\)</span> doit être une valeur entière, sinon la formule n’est pas définie. Une fois que nous connaissons <span class="math inline">\(\lambda\)</span> , nous pouvons calculer les probabilités pour différentes valeurs de <span class="math inline">\(k\)</span>. Par exemple, si <span class="math inline">\(\lambda = 3\)</span> la probailité que <span class="math inline">\(\lambda = 1\)</span> est donnée par <span class="math inline">\(3 \times \frac{e^{-3}}{1!} = 0,149\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="exponential_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Pour les petits <span class="math inline">\(\lambda\)</span>, la courbe de densité est asymétrique, mais pour les <span class="math inline">\(\lambda\)</span> plus grands, elle devient symétrique. Notez que <span class="math inline">\(\lambda\)</span> peut-être un nombre non entier, mais que les <span class="math inline">\(k\)</span> doivent être non négatifs et entiers. D’autres caractéristiques de la distribution de Poisson sont que <span class="math inline">\(P(Y&lt;0) = 0\)</span>et que la moyenne est la variance, selon la formule suivante: <span class="math inline">\(E(X) = \lambda\)</span> et <span class="math inline">\(V(X) = \lambda\)</span>.</p>
+<p>La distribution de Poisson est généralement utilisée pour les données de comptage, et ses principaux avantages sont que la probabilité de valeurs négatives est de 0 et que la relation de variance moyenne permet de tenir compte de l’hétérogénéité. Toutefois, en biologie, il est assez courant d’avoir des données pour lesquelles la variance est encore plus grande que la moyenne, ce que l’on appelle la sur-dispersion. En fonction de cette valeur, il peut être avantageux d’utiliser une distribution différente telle que la distribution négative binomiale.</p>
 </section>
 <section id="la-loi-binomial-négative" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="la-loi-binomial-négative"><span class="header-section-number">6.4</span> La loi binomial négative</h2>
+<p>Une loi binomiale négative est la distribution de probabilité discrète du nombre d’échecs dans une série d’épreuves de Bernoulli indépendantes et identiquement distribuées jusqu’à avoir un nombre fixe <span class="math inline">\(n\)</span> de succès.</p>
+<p><span class="math display">\[\mathbb{P}(X=k) = f(k;n,p) = \binom{k+n-1}{k}p^nq^k, \forall k=0,1,...\]</span> La moyenne et la variance sont donnés par <span class="math inline">\(E(X) = \frac{nq}{p}\)</span> et <span class="math inline">\(var(X) = \frac{nq}{p^2}\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="exponential_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Comme pour la distribution de Poisson, les observations avec la valeur zéro sont autorisées dans la distribution binomiale négative. Il faut aussi noter que pour une petite moyenne <span class="math inline">\(\mu\)</span> et une grande sur-dispersion (petit <span class="math inline">\(k\)</span>), la valeur 0 a de loin la probabilité la plus élevée.</p>
 </section>
-<section id="la-loi-de-bernoulli-et-la-loi-binomiale" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.5</span> La loi de Bernoulli et la loi binomiale</h2>
+<section id="la-loi-gamma" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="la-loi-gamma"><span class="header-section-number">6.5</span> La loi Gamma</h2>
+<p>La loi de Gamma peut-être utilisée pour une variable réponse <span class="math inline">\(Y\)</span> qui ont une valeur positive (<span class="math inline">\(Y &gt; 0\)</span>), et les fonctions de distribution a plusieurs formes différentes. Cependant, nous utiliserons la fonction suivante:</p>
+<p><span class="math display">\[f(y; \mu, \nu) = \frac{1}{\Gamma(\nu)} \times \binom{\nu}{\mu}^\nu \times y^{\nu-1} \times e^{\frac{y \times \nu}{\mu}}, y &gt; 0\]</span> Avant de commencer à mémoriser la définition mathématique exacte de cette fonction de densité, examinons d’abord la moyenne et la variance d’une variable <span class="math inline">\(Y\)</span> qui est distribuée de manière gamma et esquissons la courbe de densité pour différentes valeurs de <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\nu\)</span> (qui est l’équivalent du <span class="math inline">\(k\)</span> dans la distribution binomiale négative). La moyenne et la variance de <span class="math inline">\(Y\)</span> sont <span class="math inline">\(E(Y) = \mu\)</span> et <span class="math inline">\(var(Y) = \frac{\mu^2}{\nu}\)</span>.</p>
+<p>La dispersion est déterminée par <span class="math inline">\(\nu^{-1}\)</span>; une petite valeur de <span class="math inline">\(\nu\)</span> (par rapport à <span class="math inline">\(\mu^2\)</span>) implique que la dispersion des données est importante. Pour un grand <span class="math inline">\(\nu\)</span>, la distribution gamma devient en forme de cloche et symétrique. Dans ce cas, la distribution gaussienne peut également être utilisée.</p>
+</section>
+<section id="la-loi-de-bernoulli-et-la-loi-binomiale" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="la-loi-de-bernoulli-et-la-loi-binomiale"><span class="header-section-number">6.6</span> La loi de Bernoulli et la loi binomiale</h2>
 <p>Les deux dernières distributions que nous examinons sont la distribution de Bernoulli et la distribution binomiale, et nous commençons par cette dernière. Dans un cours de statistique de première année, elle est souvent présentée comme la distribution utilisée pour étudier le lancer d’une pièce de monnaie. Supposons que vous sachiez qu’une pièce est équilibrée (personne ne l’a manipulée et la probabilité d’obtenir un face est la même que celle d’obtenir la pile), et que vous la lanciez 20 fois. La question est de savoir combien de faces vous attendez? Les valeurs possibles sont comprises entre 0 et 20. Évidemment, la valeur la plus probable est 10 faces. En utilisant la distribution binomiale, nous pouvons dire quelle est la probabilité que vous obteniez 0, 1, 2, . . ., 19 ou 20 faces.</p>
 <p>Une distribution binomiale est définie comme suit. Nous disposons de N essais indépendants et identiques, chacun ayant une probabilité <span class="math inline">\(P(Y_i = 1) = \pi\)</span> de succès et une probabilité <span class="math inline">\(P(Y_i = 0) = 1 - \pi\)</span> d’échec. Les étiquettes «succès» et «échec» sont utilisées pour les résultats 1 et 0 de l’expérience. Le terme «succès» peut être assimilé à <span class="math inline">\(P(Y_i = face)\)</span> et le terme «échec» à <span class="math inline">\(P(Y_i = pile)\)</span>. Le terme «indépendant» signifie que tous les lancers ne sont pas liés. Le terme identique signifie que chaque lancer a la même probabilité de réussite. Sous ces hypothèses, la fonction de densité est donnée par <span class="math display">\[f(y; \pi) = \binom{N}{y} \times \pi^y \times (1 - \pi)^{N-y}\]</span></p>
 <p>La probabilité pour chaque valeur de <span class="math inline">\(y\)</span> entre 0 et 20 pour l’exemple du lancer peut être calculée avec cette fonction de probabilité. Par exemple, si <span class="math inline">\(N = 20\)</span> et <span class="math inline">\(π = 0,5\)</span>, la probabilité de mesurer 9 faces est de <span class="math inline">\((20!/(9! × 11!)) × 0.5^9 × (1 - 0.5)^{11}\)</span>. Comme prévu, la valeur <span class="math inline">\(y = 10\)</span> a la probabilité la plus élevée, mais 9 et 11 ont des probabilités très similaires.</p>
 <p>L’espérance et la variance de distribution binomiale est donnée par: <span class="math display">\[E(Y) = N \times \pi\]</span> et <span class="math display">\[var(Y) = N \times \pi \times (1 - \pi)\]</span></p>
 <p>En biologie, on pourrait prendre l’exemple d’un un élevage de poulets et prélevons des échantillons de <span class="math inline">\(N\)</span> animaux pour détecter la présence ou l’absence d’une maladie particulière. Dans ce type de recherche, on veut connaître la probabilité <span class="math inline">\(π\)</span> qu’un animal donné soit infecté par la maladie.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="exponential_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Une distribution de Bernoulli est obtenue si <span class="math inline">\(N = 1\)</span>; par conséquent, nous ne lançons qu’une fois ou nous n’échantillonnons qu’un seul animal de la ferme. Quatre distributions de Bernoulli avec <span class="math inline">\(\pi = 0,2\)</span>, <span class="math inline">\(\pi = 0,5\)</span>, <span class="math inline">\(\pi = 0,7\)</span> et <span class="math inline">\(\pi = 1\)</span> sont données dans la figure précédente. Il faut noter que l’on obtient uniquement des valeurs de 0 pour l’échec et 1 pour le succès. En général nous ne faisons aucune distinction entre la loi de Bernoulli et la loi binomiale, et utilisons la notation <span class="math inline">\(B(\pi, N)\)</span> pour les deux, et <span class="math inline">\(N=1\)</span> s’applique automatiquement à la loi de Bernoulli.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="exponential_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="quelle-distribution-choisir" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="quelle-distribution-choisir"><span class="header-section-number">6.7</span> Quelle distribution choisir?</h2>
+<p>Nous avons examiné un grand nombre de distributions pour la variable réponse, mais laquelle devons-nous utiliser ? Ce choix doit, en premier lieu, être fait a priori sur la base des connaissances disponibles sur la variable réponse. Par exemple, si vous modélisez la présence et l’absence d’animaux sur des sites <span class="math inline">\(M\)</span> en fonction de quelques covariables, votre choix est simple : la distribution binomiale doit être utilisée car votre variable réponse contient des zéros et des uns. C’est probablement le seul scénario où le choix est aussi évident. Cela dit, si nous agrégeons la réponse en groupes, nous avons (peut-être) une distribution de Poisson. Si vos données sont des comptages (d’animaux, de plantes, etc.) sans limite supérieure, la distribution de Poisson est une option. En effet, les comptages sont toujours non négatifs et tendent à être hétérogènes, ce qui est conforme à la distribution de Poisson. En cas de forte surdispersion, la distribution binomiale négative est une alternative à la distribution de Poisson pour les données de comptage. Vous pouvez également utiliser la distribution normale pour les comptages (éventuellement combinée à une transformation des données), mais la distribution de Poisson ou la distribution binomiale négative peuvent être plus appropriées. Toutefois, la distribution normale n’exclut pas les réalisations négatives.</p>
+<p>Il est également possible d’avoir des comptages avec une limite supérieure. Par exemple, si vous comptez le nombre d’animaux d’une ferme qui sont infectés par une maladie, sur un total de <span class="math inline">\(N\)</span> animaux. Le nombre maximum d’animaux infectés est alors <span class="math inline">\(N\)</span>. Si vous considérez chaque animal comme un essai indépendant et que chaque animal a la même probabilité d’être infecté, nous sommes alors dans le monde d’une distribution binomiale. Mais que fait-on avec les densités ? La densité est souvent définie comme les nombres (qui sont des comptages !) par volume (ou surface, plage de profondeur, etc.). Elle peut être modélisée par la distribution de Poisson (ou NB) et une variable offset.</p>
+<p>Si la variable réponse est une variable continue comme le poids de l’animal, la distribution normale est la meilleure option, mais la distribution gamma peut être un choix alternatif.</p>
+<p>Il est important de comprendre que ces distributions concernent les variables de réponse et non les variables explicatives. Le choix de la distribution à utiliser est un choix a priori. Une liste de toutes les distributions discutées dans cette section figure au tableau suivant.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>Type de données</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normale</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Poisson</td>
+<td>Données de comptage (entiers) et densité</td>
+</tr>
+<tr class="odd">
+<td>Binomial Négatif</td>
+<td>Données de comptage sur-dispersée et densité</td>
+</tr>
+<tr class="even">
+<td>Géométrique</td>
+<td>Données de comptage sur-dispersée et densité</td>
+</tr>
+<tr class="odd">
+<td>Gamma</td>
+<td>Continue</td>
+</tr>
+<tr class="even">
+<td>Binomial</td>
+<td>Données proportionnelles</td>
+</tr>
+<tr class="odd">
+<td>Bernoulli</td>
+<td>Données de presence-absence</td>
+</tr>
+</tbody>
+</table>
+<p>Si vous hésitez entre deux distributions concurrentes, par exemple la distribution normale et la distribution gamma, ou la distribution de Poisson et la distribution binomiale négative, vous pouvez tracer la moyenne en fonction de la variance de la variable réponse et voir quel type de relation moyenne-variance vous avez et sélectionner une fonction de distribution en conséquence.</p>
 
 
 </section>

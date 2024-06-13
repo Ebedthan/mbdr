@@ -188,14 +188,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./exponential.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -283,11 +289,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Un aspect important de la régression linéaire est la répartition de la variabilité totale. La variance totale de <span class="math inline">\(Y\)</span>, désignée par <span class="math inline">\(SS_{total}\)</span>, peut être divisée en deux parties: la partie expliquée par <span class="math inline">\(X\)</span> (<span class="math inline">\(SS_{régression}\)</span>) et la partie non expliquée par <span class="math inline">\(X\)</span> (<span class="math inline">\(SS_{résidual}\)</span>). <span class="math inline">\(SS_{regression}\)</span> mesure à quel point la partie régression (<span class="math inline">\(X\)</span>) explique <span class="math inline">\(Y\)</span>, et <span class="math inline">\(SS_{residual}\)</span> montre la quantité de variabilité dans les valeurs <span class="math inline">\(Y\)</span> qui ne peut être expliquée par le modèle de régression. La plupart des programmes statistiques produisent des tableaux ANOVA de la forme suivante.</p>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 23%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -301,42 +307,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>Regression</td>
-<td><span class="math display">\[                                
-                       \sum^n_{i=1}(\hat Y_i - \bar Y)^2  
-                       \]</span></td>
-<td><span class="math display">\[               
-                                                           1                 
-                                                           \]</span></td>
-<td><span class="math display">\[                                          
-                                                                              \sum^n_{i=1}\frac{(\hat Y_i - \bar Y)^2}{1}  
-                                                                              \]</span></td>
-<td><span class="math display">\[                                                           
-                                                                                                                            \sigma^2_\epsilon + \beta^2\sum^n_{i=1}(\hat X_i - \bar X)^2  
-                                                                                                                            \]</span></td>
+<td><span class="math display">\[                                                         
+                                              \sum^n_{i=1}(\hat Y_i - \bar Y)^2    
+                                              \]</span></td>
+<td><span class="math display">\[                                                                            
+                                                                                                                                               1                   
+                                                                                                                                               \]</span></td>
+<td><span class="math display">\[                                                                                                                          
+                                                                                                                                                                                                                                                  \sum^n_{i=1}\frac{(\hat Y_i - \bar Y)^2}{1}    
+                                                                                                                                                                                                                                                  \]</span></td>
+<td><span class="math display">\[                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                              \sigma^2_\epsilon + \beta^2\sum^n_{i=1}(\hat X_i - \bar X)^2    
+                                                                                                                                                                                                                                                                                                                                                                                                                              \]</span></td>
 </tr>
 <tr class="even">
 <td>Residus</td>
-<td><span class="math display">\[                                
-                       \sum^n_{i=1}(Y_i - \hat Y_i)^2     
-                       \]</span></td>
-<td><span class="math display">\[               
-                                                           n-2               
-                                                           \]</span></td>
-<td><span class="math display">\[                                          
-                                                                              \sum^n_{i=1}\frac{(Y_i - \hat Y_i)^2}{n-2}   
-                                                                              \]</span></td>
-<td><span class="math display">\[                                                           
-                                                                                                                            \sigma^2_\epsilon                                             
-                                                                                                                            \]</span></td>
+<td><span class="math display">\[                                                         
+                                              \sum^n_{i=1}(Y_i - \hat Y_i)^2       
+                                              \]</span></td>
+<td><span class="math display">\[                                                                            
+                                                                                                                                               n-2                 
+                                                                                                                                               \]</span></td>
+<td><span class="math display">\[                                                                                                                          
+                                                                                                                                                                                                                                                  \sum^n_{i=1}\frac{(Y_i - \hat Y_i)^2}{n-2}     
+                                                                                                                                                                                                                                                  \]</span></td>
+<td><span class="math display">\[                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                              \sigma^2_\epsilon                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                              \]</span></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
-<td><span class="math display">\[                                
-                       \sum^n_{i=1}(Y_i - \bar Y)^2       
-                       \]</span></td>
-<td><span class="math display">\[               
-                                                           n-1               
-                                                           \]</span></td>
+<td><span class="math display">\[                                                         
+                                              \sum^n_{i=1}(Y_i - \bar Y)^2         
+                                              \]</span></td>
+<td><span class="math display">\[                                                                            
+                                                                                                                                               n-1                 
+                                                                                                                                               \]</span></td>
 <td></td>
 <td></td>
 </tr>

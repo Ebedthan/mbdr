@@ -41,32 +41,32 @@ La question qui se pose maintenant est la suivante : Devons-nous examiner d'abor
 
 Un aspect important de la régression linéaire est la répartition de la variabilité totale. La variance totale de $Y$, désignée par $SS_{total}$, peut être divisée en deux parties: la partie expliquée par $X$ ($SS_{régression}$) et la partie non expliquée par $X$ ($SS_{résidual}$). $SS_{regression}$ mesure à quel point la partie régression ($X$) explique $Y$, et $SS_{residual}$ montre la quantité de variabilité dans les valeurs $Y$ qui ne peut être expliquée par le modèle de régression. La plupart des programmes statistiques produisent des tableaux ANOVA de la forme suivante.
 
-| Source de variation | Somme des carrés                  | Degré de liberté | Somme des carrés moyens                     | Somme des carrés moyens attendu                              |
-|--------------|--------------|--------------|--------------|-----------------|
-| Regression          | $$                                
-                       \sum^n_{i=1}(\hat Y_i - \bar Y)^2  
-                       $$                                 | $$               
-                                                           1                 
-                                                           $$                | $$                                          
-                                                                              \sum^n_{i=1}\frac{(\hat Y_i - \bar Y)^2}{1}  
-                                                                              $$                                           | $$                                                           
-                                                                                                                            \sigma^2_\epsilon + \beta^2\sum^n_{i=1}(\hat X_i - \bar X)^2  
-                                                                                                                            $$                                                            |
-| Residus             | $$                                
-                       \sum^n_{i=1}(Y_i - \hat Y_i)^2     
-                       $$                                 | $$               
-                                                           n-2               
-                                                           $$                | $$                                          
-                                                                              \sum^n_{i=1}\frac{(Y_i - \hat Y_i)^2}{n-2}   
-                                                                              $$                                           | $$                                                           
-                                                                                                                            \sigma^2_\epsilon                                             
-                                                                                                                            $$                                                            |
-| Total               | $$                                
-                       \sum^n_{i=1}(Y_i - \bar Y)^2       
-                       $$                                 | $$               
-                                                           n-1               
-                                                           $$                |                                             |                                                              |
-|                     |                                   |                  |                                             |                                                              |
+| Source de variation | Somme des carrés                                           | Degré de liberté                                                              | Somme des carrés moyens                                                                                                     | Somme des carrés moyens attendu                                                                                                                                                            |
+|---------------|---------------|---------------|---------------|---------------|
+| Regression          | $$                                                         
+                                              \sum^n_{i=1}(\hat Y_i - \bar Y)^2    
+                                              $$                                   | $$                                                                            
+                                                                                                                                               1                   
+                                                                                                                                               $$                  | $$                                                                                                                          
+                                                                                                                                                                                                                                                  \sum^n_{i=1}\frac{(\hat Y_i - \bar Y)^2}{1}    
+                                                                                                                                                                                                                                                  $$                                             | $$                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                              \sigma^2_\epsilon + \beta^2\sum^n_{i=1}(\hat X_i - \bar X)^2    
+                                                                                                                                                                                                                                                                                                                                                                                                                              $$                                                              |
+| Residus             | $$                                                         
+                                              \sum^n_{i=1}(Y_i - \hat Y_i)^2       
+                                              $$                                   | $$                                                                            
+                                                                                                                                               n-2                 
+                                                                                                                                               $$                  | $$                                                                                                                          
+                                                                                                                                                                                                                                                  \sum^n_{i=1}\frac{(Y_i - \hat Y_i)^2}{n-2}     
+                                                                                                                                                                                                                                                  $$                                             | $$                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                              \sigma^2_\epsilon                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                              $$                                                              |
+| Total               | $$                                                         
+                                              \sum^n_{i=1}(Y_i - \bar Y)^2         
+                                              $$                                   | $$                                                                            
+                                                                                                                                               n-1                 
+                                                                                                                                               $$                  |                                                                                                                             |                                                                                                                                                                                            |
+|                     |                                                            |                                                                               |                                                                                                                             |                                                                                                                                                                                            |
 
 La somme des carrés dépend de la taille de l'échantillon $n$. Si l'on utilise davantage d'observations, les sommes des carrés sont plus importantes. Par conséquent, les sommes des carrés sont transformées en composantes de variance en les divisant par les degrés de liberté. Les degrés de liberté pour la somme des carrés de régression sont le nombre de paramètres de régression moins 1. Les degrés de liberté pour la somme totale des carrés est $n - 1$. S'il n'y avait pas de variables explicatives, la variance serait estimée à partir du rapport entre la somme totale des carrés et $n - 1$.
 
