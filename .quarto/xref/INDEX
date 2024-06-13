@@ -43,5 +43,11 @@
   },
   "exponential.qmd": {
     "exponential.html": "68428f59"
+  },
+  "glm_gam_count.qmd": {
+    "glm_gam_count.html": "9c4b925e"
+  },
+  "glm_gam_proportion.qmd": {
+    "glm_gam_proportion.html": "ee1cc8df"
   }
 }

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Anicet Ebou">
 
-<title>Modélisation des données biologiques avec R - 7&nbsp; Modèles additifs généralisés</title>
+<title>Modélisation des données biologiques avec R - 7&nbsp; Modèles linéaire et additifs généralisés pour les données de comptage</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./glm.html" rel="prev">
+<link href="./glm_gam_proportion.html" rel="next">
+<link href="./exponential.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -63,6 +97,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -75,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gam.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./glm_gam_count.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaire et additifs généralisés pour les données de comptage</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,14 +188,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
+  <a href="./exponential.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./gam.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></span></a>
+  <a href="./glm_gam_count.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaire et additifs généralisés pour les données de comptage</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glm_gam_proportion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -174,14 +216,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
+  <li><a href="#un-glm-du-jeu-de-données-roadkills" id="toc-un-glm-du-jeu-de-données-roadkills" class="nav-link" data-scroll-target="#un-glm-du-jeu-de-données-roadkills"><span class="header-section-number">7.2</span> Un GLM du jeu de données <code>roadkills</code></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles additifs généralisés</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modèles linéaire et additifs généralisés pour les données de comptage</span></h1>
 </div>
 
 
@@ -196,8 +245,29 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="introduction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>Un modèle linéaire généralisé (GLM) ou un modèle additif généralisé (GAM) se compose de trois étapes: (i) la distribution de la variable réponse, (ii) la spécification de la composante systématique en termes de variables explicatives, et (iii) le lien entre la moyenne de la variable réponse et la partie systématique.</p>
+<p>Dans ce chapitre, nous nous concentrons sur les données de comptage et utilisons les distributions de Poisson et binomiale négative.</p>
+<p>Un GLM se compose de trois étapes :</p>
+<p>1. Une hypothèse sur la distribution de la variable réponse <span class="math inline">\(Y_i\)</span> . Cette hypothèse définit également la moyenne et la variance de <span class="math inline">\(Y_i\)</span> .</p>
+<p>2. Spécification de la partie systématique. Il s’agit d’une fonction des variables explicatives.</p>
+<p>3. La relation entre la valeur moyenne de <span class="math inline">\(Y_i\)</span> et la partie systématique. On l’appelle aussi le lien entre la moyenne et la partie systématique.</p>
+</section>
+<section id="un-glm-du-jeu-de-données-roadkills" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="un-glm-du-jeu-de-données-roadkills"><span class="header-section-number">7.2</span> Un GLM du jeu de données <code>roadkills</code></h2>
+<p>Les données sont des comptages, et il semble y avoir une relation non linéaire, peut-être exponentielle, entre les victimes de la route et le <code>D.PARK</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>roadkills <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"RoadKills.txt"</span>, <span class="at">header=</span>T)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roadkills<span class="sc">$</span>D.PARK, roadkills<span class="sc">$</span>TOT.N, <span class="at">xlab=</span><span class="st">"Distance du parc"</span>, <span class="at">ylab=</span><span class="st">"Nombre de morts"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="glm_gam_count_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notez également que la variation est plus importante pour des valeurs plus élevées de roadkills. L’ensemble de ces éléments nous donne tous les ingrédients d’un GLM de Poisson. Commencer avec seulement <code>D.PARK</code> comme variable explicative, et ignorer les 10 autres variables explicatives, est un choix pédagogique pour présenter le GLM de Poisson dans un manuel et n’est pas une recommandation générale pour l’analyse de ces données. Le GLM de Poisson suivant a été appliqué.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -435,13 +505,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./glm.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span>
+      <a href="./exponential.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">La famille des lois exponentielles</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./glm_gam_proportion.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modèles linéaires généralisés</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

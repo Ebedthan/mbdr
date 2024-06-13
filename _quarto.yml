@@ -28,8 +28,8 @@ book:
     - regression.qmd
     - additive.qmd
     - exponential.qmd
-    - glm.qmd
-    - gam.qmd
+    - glm_gam_count.qmd
+    - glm_gam_proportion.qmd
     - references.qmd
 
 bibliography: references.bib

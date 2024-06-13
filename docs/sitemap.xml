@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ebedthan.github.io/mbdr/index.html</loc>
-    <lastmod>2024-06-12T12:46:12.168Z</lastmod>
+    <lastmod>2024-06-13T14:16:13.462Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/intro.html</loc>
-    <lastmod>2024-06-12T12:46:12.176Z</lastmod>
+    <lastmod>2024-06-13T14:16:16.091Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/datasets.html</loc>
-    <lastmod>2024-06-12T12:46:12.180Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.048Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/organigram.html</loc>
-    <lastmod>2024-06-12T12:46:12.184Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.052Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/exploration.html</loc>
-    <lastmod>2024-06-12T12:46:12.216Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.084Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/regression.html</loc>
-    <lastmod>2024-06-13T10:04:30.944Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.108Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/additive.html</loc>
-    <lastmod>2024-06-13T10:04:33.344Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/glm.html</loc>
-    <lastmod>2024-06-13T09:51:30.373Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/gam.html</loc>
-    <lastmod>2024-06-12T12:46:12.260Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ebedthan.github.io/mbdr/references.html</loc>
-    <lastmod>2024-06-12T12:46:12.264Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.116Z</lastmod>
   </url>
   <url>
     <loc>https://ebedthan.github.io/mbdr/exponential.html</loc>
-    <lastmod>2024-06-13T13:42:18.123Z</lastmod>
+    <lastmod>2024-06-13T14:16:02.124Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/glm_gam_count.html</loc>
+    <lastmod>2024-06-13T14:16:26.560Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/glm_gam_proportion.html</loc>
+    <lastmod>2024-06-13T14:16:19.527Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ebedthan.github.io/mbdr/references.html</loc>
+    <lastmod>2024-06-13T14:16:02.144Z</lastmod>
   </url>
 </urlset>
